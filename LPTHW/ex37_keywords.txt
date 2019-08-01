@@ -1,0 +1,37 @@
+These are the Python keywords we know and some new ones.
+
+Keyword - Description - Example
+
+and - Logical and. - True and False == False
+as - Part of with/as - with X as Y: Pass
+assert - Prints error when false - assert False, "Error!"
+break - Stops loop instantly - while True: break
+class - define a class - class Person(object)
+continue - Go back to the beginning of a loop - while True: continue
+def - define a function - def X(): pass
+del - Delete from dictionary. - del X[Y]
+elif - Else/if condition. - if: X; elif: Y; else: J
+else - Else condition. - if: X; elif: Y; else: J
+except - If an exception happens, do this - except ValueError as e: print(e)
+exec - Run a string as Python - exec('print("Hello")')
+finally - Do this no matter what - finally: pass
+for - Loop over a collection of things. - for X in Y: pass
+from - Import specific parts of a module. - from x import Y
+global - Declare that you want a global variable. - global X
+if - If condition. - if: X; elif: Y; else: J
+import - Import a module into this one to use. - import os 
+in - Part of for-loops. Also a test of X in Y. - for X in Y: Pass also 1 in [1] == True
+is - Like == to test equality. - 1 is 1 == True
+lambda - Create a short anonymous function. - s = lambda y: y ** y ; s(3)
+not - Logical not. - not True == False
+or - Logical or. - True or False == True
+pass - This block is empty. - def empty(): pass
+print - Print this string. - print('this string')
+raise - Raise an exception when things go wrong. - raise ValueError("No")
+return - Exit the function with a return value. - def X()L return Y
+try - Try this block, and if exception, go to except. - try: pass
+while - While loop. - while X: pass
+with - With an expression as a variable do. - with X as Y: pass
+yield - Pause here and return to caller. - def X(): yield Y; X().next()
+
+Go to ex37_data.txt for the Python Data Types

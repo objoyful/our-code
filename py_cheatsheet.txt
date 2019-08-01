@@ -1,0 +1,11 @@
+If you want to write an 's use the \' escape sequence or use " or """
+
+if i < 10:
+    print("Steve")
+elif = else if
+else:
+    print("Bill")
+
+4 spaces to indent
+
+for every function, there has to be only ONE return statement
