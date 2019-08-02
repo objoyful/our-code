@@ -1,2 +1,2 @@
 # Our Code
-All of the Python code I have wirten and shown you is availble here.
+All of the Python code I have written and shown you is available here.
