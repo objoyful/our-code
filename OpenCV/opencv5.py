@@ -29,6 +29,7 @@ cv2.imshow('Mask Inv', mask_inv)
 
 
 fluf_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
+cv2.imwrite('coolfluf.jpg', fluf_bg)
 cv2.imshow('Fluf Background', fluf_bg)
 glasses_fg = cv2.bitwise_and(glasses, glasses, mask = mask)
 cv2.imshow('Glasses Foreground', glasses_fg)

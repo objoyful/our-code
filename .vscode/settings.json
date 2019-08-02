@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\chess\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.pythonPath": "C:\\Users\\Owner\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
     "python.linting.pylintEnabled": true,
     "cSpell.enabledLanguageIds": [
         "asciidoc",
