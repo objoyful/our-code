@@ -27,4 +27,4 @@ INSERT INTO Bobmart VALUES(26, "Steve's Supreme Coffee Cakes", 3.50, 15, 2);
 INSERT INTO Bobmart VALUES(27, "rolls", 0.30, 10, 3);
 INSERT INTO Bobmart VALUES(28, " Chiken Noodle Soup", 2.25, 55, 4);
 
-SELECT * FROM Bobmart
+SELECT * FROM Bobmart;
