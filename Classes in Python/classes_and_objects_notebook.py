@@ -1,4 +1,3 @@
-
 #%%
 class Robot:
     name = None
@@ -6,7 +5,6 @@ class Robot:
     weight = None
     def introduce_self(self):
         print("My name is " + self.name)
-
 
 #%%
 r1 = Robot()
@@ -19,11 +17,9 @@ r2.name = "Jerry"
 r2.color = "blue"
 r2.weight = 40
 
-
 #%%
 r1.introduce_self()
 r2.introduce_self()
-
 
 #%%
 class Robot:
@@ -34,19 +30,10 @@ class Robot:
 
     def introduce_self(self):
         print("My name is " + self.name) # this in Java
-
-
 #%%
 r1 = Robot("Tom", "red", 30)
 r2 = Robot("Jerry", "blue", 40)
 
-
 #%%
 r1.introduce_self()
 r2.introduce_self()
-
-
-#%%
-
-
-
