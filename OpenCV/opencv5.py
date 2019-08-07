@@ -1,4 +1,3 @@
-import numpy as np
 import cv2
 
 ##img1 = cv2.imread("plot1.png")

@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 book = cv2.imread('bookpage.jpg')
 cv2.imshow('Original', book)
