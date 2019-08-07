@@ -7,6 +7,7 @@ graybook = cv2.cvtColor(book, cv2.COLOR_BGR2GRAY)
 cv2.imshow('Gray', graybook)
 
 ret, thresh = cv2.threshold(book, 7, 255, cv2.THRESH_BINARY)
+print('Ret', ret)
 cv2.imshow('Color Thresh', thresh)
 
 graythresh = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY)
@@ -17,6 +18,10 @@ cv2.imshow('Original Adaptive Thresh', originaladaptive)
 
 adaptive = cv2.adaptiveThreshold(graybook, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 111, 3)
 cv2.imshow('My Adaptive Thresh', adaptive)
+
+otsu_ret, otsu = cv2.threshold(graybook, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+print('Otsu Ret', otsu_ret)
+cv2.imshow('Otsu Thresh', otsu)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
