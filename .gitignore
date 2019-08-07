@@ -4,4 +4,4 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 Virtualenv/
-/requirments.txt
+/requirements.txt
