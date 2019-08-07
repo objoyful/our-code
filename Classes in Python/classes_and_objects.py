@@ -11,7 +11,7 @@ class Robot:
 # r1.name = "Tom"
 # r1.color = "red"
 # r1.weight = 30
-#
+
 # r2 = Robot()
 # r2.name = "Jerry"
 # r2.color = "blue"
