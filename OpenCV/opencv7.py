@@ -8,13 +8,8 @@ while(1):
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-<<<<<<< HEAD
-    lower_red = np.array([150, 150, 150])
-    upper_red = np.array([255, 255, 255])
-=======
     lower_red = np.array([50, 170, 170])
     upper_red = np.array([150, 255, 255])
->>>>>>> 7584ab6cd4c2fcdb30c3fcc27966a8adab47790b
 
     mask = cv2.inRange(hsv, lower_red, upper_red)
 
