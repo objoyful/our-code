@@ -1,0 +1,22 @@
+cSpell: Disable
+
+These are all the packages we will need.
+
+Windows:
+
+pip install --user <packages>
+
+Linux:
+
+sudo apt install python3-pip
+pip3 install --user <packages>
+sudo apt install python3-opencv
+
+Packages:
+
+Windows:
+opencv-python numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras tensorflow
+
+Linux:
+numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras tensorflow
+Do 'sudo apt install python3-opencv' to install OpenCV.
