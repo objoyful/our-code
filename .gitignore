@@ -4,4 +4,6 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 Virtualenv/
-requirments.txt
+/requirements.txt
+/LPTHW/ex26_broken.py 
+/updatepackages.py
