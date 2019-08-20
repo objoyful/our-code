@@ -6,4 +6,4 @@ __pycache__/
 Virtualenv/
 /LPTHW/ex26_broken.py 
 /updatepackages.py
-/Cache
+Cache/
