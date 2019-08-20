@@ -32,7 +32,7 @@ while(1):
     bilateral = cv2.bilateralFilter(result, 15, 75, 75)
     
     cv2.putText(frame, f"{frames + 1} frames.", (200, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
-    
+
     cv2.imshow('Frame', frame)
     cv2.imshow('HSV', hsv)
     #cv2.imshow('HSV Blur', hsv_blur)
