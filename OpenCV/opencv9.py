@@ -8,7 +8,7 @@ cam = cv2.VideoCapture(0)
 
 while(1):
     max_fps = 0
-    fps = round(frames / (time.time() - start_time), 2)
+    fps = round(frames / (time.time() - start_time), 1)
 
     if fps > max_fps:
         max_fps = fps
