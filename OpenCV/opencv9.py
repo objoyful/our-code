@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import time
 
+print(f"cv2 version: {cv2.__version__}")
 frames = 0
 start_time = time.time()
 cam = cv2.VideoCapture(0)
