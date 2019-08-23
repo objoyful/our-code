@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 
-print(f"cv2 version: {cv2.__version__}")
+print(f"cv2 version: {cv2.__version__}]")
 frames = 0
 start_time = time.time()
 cam = cv2.VideoCapture(0)
@@ -15,7 +15,7 @@ while(1):
         max_fps = fps
     else:
         max_fps = max_fps
-    
+
     _, frame = cam.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
