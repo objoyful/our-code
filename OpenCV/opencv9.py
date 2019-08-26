@@ -27,7 +27,9 @@ while(1):
 
     kernel = np.ones((5, 5), np.uint8)
 
+    # Erosion "erodes" the edges. If all the pixels in our kernel are white, we get white, if not we get black.
     erosion_result = cv2.bitwise_and(frame, frame, mask = cv2.erode(mask, kernel))
+    # Dilation is exactly the oposite. If all the pixels are black, it'll be Black or else it'll be white.
     dilation = cv2.bitwise_and(frame, frame, mask = cv2.dilate(mask, kernel))
 
     opening = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel))
