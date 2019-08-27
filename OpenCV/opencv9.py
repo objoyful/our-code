@@ -32,6 +32,7 @@ while(1):
     # Dilation is exactly the oposite. If all the pixels are black, it'll be Black or else it'll be white.
     dilation = cv2.bitwise_and(frame, frame, mask = cv2.dilate(mask, kernel))
 
+    # Opening trys to remove false positives (the specks in the background) and closing trys to remove the false negitaves (the black spots inside the glove).
     opening = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel))
     closing = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel))
 
