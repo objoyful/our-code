@@ -36,7 +36,9 @@ while(1):
     opening = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel))
     closing = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel))
 
+    # The differnece between the original Mask and the Opening
     tophat = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_TOPHAT, kernel))
+    # Difference between the original and the Closing.
     blackhat = cv2.bitwise_and(frame, frame, mask = cv2.morphologyEx(mask, cv2.MORPH_BLACKHAT, kernel))
 
     cv2.putText(result, f"{frames + 1} frames.", (50, 300), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 5)
