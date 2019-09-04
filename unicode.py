@@ -4,7 +4,7 @@ def unicode():
         unicode_value = ord(key)
 
         print(f""""{key}" in Unicode is {unicode_value}.""")
-    
+
     except TypeError:
         if len(key) != 1:
             print("You can only type one character.")

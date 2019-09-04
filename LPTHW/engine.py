@@ -12,9 +12,9 @@ def fail(what, what_failed):
     failed = what
     eng = False
     whatfailed = what_failed
-    
 
-def check_engine():   
+
+def check_engine():
     global eng
     if i < 100:
         if j > 28:
