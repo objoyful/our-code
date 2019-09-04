@@ -12,7 +12,7 @@ while(1):
 
     ddepth = cv2.CV_64F
     ksize = 15
-    
+
     laplacian = cv2.Laplacian(src, ddepth)
     sobelx = cv2.Sobel(src, ddepth, 1, 0, ksize = ksize)
     sobely = cv2.Sobel(src, ddepth, 0, 1, ksize = ksize)

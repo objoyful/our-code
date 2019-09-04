@@ -3,11 +3,11 @@
 
 # Terms:
 
-# and - Both terms have to be True for the expression to be true Ex: True and False is False, True and True is True 
+# and - Both terms have to be True for the expression to be true Ex: True and False is False, True and True is True
 # or - One of the terms have to be True EX: True or False is True, False or False is False
 # not - the inverse EX: not (True) is False , not (False) is True
 # != (not equal) - if the two expressions are not equal this is True EX: 1 != 0 is True, "test" != "test" is False
-# == (equal) - if the two expressions are equla, this is True. EX: 1 == 0 is False, "test" == "test" is True 
+# == (equal) - if the two expressions are equla, this is True. EX: 1 == 0 is False, "test" == "test" is True
 # > - Greater than EX: 1 > 0 is True, 0 > 1 is False
 # >= - Greater than or equal EX: 1 >= 0 is True, 0 >= 1 is False
 # < - Less than EX: 1 < 0 is False, 0 < 1 is True

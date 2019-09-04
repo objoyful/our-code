@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import cv2 #BGR!!
 
 gray_fluf = cv2.imread('newfluf.jpg', cv2.IMREAD_GRAYSCALE)

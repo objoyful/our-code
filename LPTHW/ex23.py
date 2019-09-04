@@ -10,7 +10,7 @@
 # One problem: there is a lot of wasted space. Instead of each character being 1 byte it's 4. Imagine taking up 4 times as much space on your hard drive.
 # So what they did was still use 8 bit for the most common characters, but then escape into 32 bit when rare ones come up.
 
- 
+
 import sys
 script, input_encoding, error = sys.argv # pylint: disable=unbalanced-tuple-unpacking <-- I have to do that so I don't get weird errors.
 

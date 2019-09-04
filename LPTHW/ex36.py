@@ -35,7 +35,7 @@ def first_door():
         if redo:
             print("Bobby is still blocking the other door. What do you do?")
         else:
-            print("You go into a dark room. You see Bobby blocking another door. What do you do?") 
+            print("You go into a dark room. You see Bobby blocking another door. What do you do?")
         bobby = input("> ")
         if "punch" in bobby:
             print("Bobby is knocked out. What do you do?")
@@ -100,6 +100,6 @@ def start():
             second_door()
         else:
             pick_door = True
-            
+         
 
 start()
