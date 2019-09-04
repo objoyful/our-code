@@ -24,7 +24,7 @@ elif door == "2":
     print("3. Understanding revolvers yelling melodies.")
 
     insanity = input("> ")
- 
+
     if insanity == "1" or insanity == "2":
         print("Your body survives powered by a mind of jello.  Good job!")
     else:
