@@ -4,7 +4,7 @@ v = 12.1
 
 def print_values():
    return str(i), str(j), str(v)
-  
+
 def fail(what, what_failed):
     global eng
     global failed

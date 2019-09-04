@@ -100,6 +100,6 @@ def start():
             second_door()
         else:
             pick_door = True
-         
+
 
 start()
