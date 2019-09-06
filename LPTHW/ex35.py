@@ -4,7 +4,7 @@ def gold_room():
     print("This room is full of gold. How much do you take?")
 
     choice = input("> ")
-    
+
     try:
         how_much = int(choice)
     except:
