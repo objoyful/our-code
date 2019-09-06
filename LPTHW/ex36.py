@@ -73,7 +73,7 @@ def second_door():
         else:
             bear_redo = True
         bear_redo = True
-            
+
 def dead(reason):
     print(f"{reason}  Good job!")
     print("Would you like to try again")
