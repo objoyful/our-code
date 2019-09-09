@@ -8,3 +8,4 @@ Virtualenv/
 /updatepackages.py
 Cache/
 Bob's Stuff/
+vcpkg/
