@@ -11,3 +11,4 @@ mglearn
 statsmodels
 keras
 tensorflow
+graphviz
