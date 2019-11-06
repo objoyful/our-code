@@ -9,3 +9,4 @@ Virtualenv/
 Cache/
 Bob's Stuff/
 vcpkg/
+env-test/
