@@ -12,3 +12,4 @@ vcpkg/
 env-test/
 requirements-txt-env/
 /calb.py
+HangMan/
