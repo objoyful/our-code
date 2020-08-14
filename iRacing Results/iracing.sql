@@ -1,1 +1,0 @@
-CREATE TABLE iracing (id INTEGER PRIMARY KEY, pos INTEGER, avgtime REAL, besttime REAL, sof INTEGER, inc INTEGER, oldirating INTEGER, newirating INTEGER, oldlicense INTEGER, newlicense INTEGER);
