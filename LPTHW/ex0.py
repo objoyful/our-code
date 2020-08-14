@@ -12,5 +12,5 @@
 # 7. Make a directory to put all of your programs in. (mkdir)
 # 8. Change into that directory. (cd)
 # 9. Use VSCode to make a file.
-# 10. Go back to Powershell just using the keyboard (Alt+Tab).
+# 10. Go back to Powershell.
 # 11. In Powershell, list the directory to see your file. (ls)
