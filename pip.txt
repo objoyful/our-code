@@ -13,3 +13,5 @@ keras
 tensorflow
 graphviz
 Django
+dronekit
+dronekit-sitl
