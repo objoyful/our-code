@@ -1,3 +1,4 @@
+pip
 numpy
 scipy
 matplotlib
@@ -15,3 +16,5 @@ graphviz
 Django
 dronekit
 dronekit-sitl
+opencv-python
+opencv-contrib-python
