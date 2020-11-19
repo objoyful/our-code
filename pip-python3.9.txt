@@ -11,7 +11,7 @@ jupyter
 mglearn
 statsmodels
 keras
-tensorflow
+#tensorflow
 graphviz
 Django
 dronekit
