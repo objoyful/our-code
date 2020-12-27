@@ -20,3 +20,4 @@ opencv-python
 opencv-contrib-python
 pygame
 lxml
+MAVProxy

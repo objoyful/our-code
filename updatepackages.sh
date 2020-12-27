@@ -1,6 +1,7 @@
 #Install packages for Drone Dojo
 sudo apt install python3.8 python3.9 python3-pip python2 python-dev python3-dev python3-wxgtk4.0 python3-yaml vim git screen
 python2 ./Packages/get-pip.py --user
+sudo usermod -a -G dialout $USER
 
 #Python 2
 python -m pip install -r requirements-python2.txt -U --user
