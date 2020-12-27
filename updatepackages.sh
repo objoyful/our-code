@@ -9,7 +9,7 @@ python -m pip install -r pip-python2.txt -U --user
 
 #Python 3
 python3 -m pip install -r requirements.txt -U --user
-python3 -m pip install -r pi.txt -U --user
+python3 -m pip install -r pip.txt -U --user
 
 #Python 3.9
 python3.9 -m pip install -r requirements.txt -U --user
