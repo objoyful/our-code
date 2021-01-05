@@ -1,3 +1,4 @@
+# pylint: disable=unbalanced-tuple-unpacking
 from sys import argv
 
 script, user_name = argv
