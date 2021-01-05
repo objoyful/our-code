@@ -26,22 +26,20 @@ finally:
             print("Something else...")
 
     noError = None
-    isError()
+    #isError()
     while noError!=True:
         try:
             in_file = open(from_file)
             noError = True
-            isError()
+            #isError()
         except FileNotFoundError:
             print(f"File '{from_file}' was not found. Please choose a file that exists.")
             from_file = input("New File Name: ")
-            noError = False
-            isError()
+            #isError()
         except:
             print(f"There was a problem opening '{from_file}'. Please choose another.")
             from_file = input("New File Name: ")
-            noError = False
-            isError()
+            #isError()
 
     indata = in_file.read()
 
