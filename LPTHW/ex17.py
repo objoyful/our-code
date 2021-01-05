@@ -15,17 +15,20 @@ except:
 finally:
     print(f"Copying from {from_file} to {to_file}")
 
-    # we could do these two on one line, how?
-    try:
-        in_file = open(from_file)
-    except FileNotFoundError:
-        print("The from file was not found. Please choose a file that exists.")
-        from_file = input("New File Name: ")
-    except:
-        print("There was a problem opening the from file. Please choose another.")
-        from_file = input("New File Name: ")
-    finally:
-        in_file = open(from_file)
+    noError = None
+    while noError!=True:
+        try:
+            in_file = open(from_file)
+            noError = True
+        except FileNotFoundError:
+            print(f"File '{from_file}' was not found. Please choose a file that exists.")
+            from_file = input("New File Name: ")
+            noError = False
+        except:
+            print(f"There was a problem opening '{from_file}'. Please choose another.")
+            from_file = input("New File Name: ")
+            noError = False
+
     indata = in_file.read()
 
     print(f"The input file is {len(indata)} bytes long")
