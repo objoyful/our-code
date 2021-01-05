@@ -15,19 +15,33 @@ except:
 finally:
     print(f"Copying from {from_file} to {to_file}")
 
+    def isError():
+        if noError==True:
+            print("There is no error yet")
+        elif noError==False:
+            print("There is an error.")
+        elif noError==None:
+            print("The program just started.")
+        else:
+            print("Something else...")
+
     noError = None
+    isError()
     while noError!=True:
         try:
             in_file = open(from_file)
             noError = True
+            isError()
         except FileNotFoundError:
             print(f"File '{from_file}' was not found. Please choose a file that exists.")
             from_file = input("New File Name: ")
             noError = False
+            isError()
         except:
             print(f"There was a problem opening '{from_file}'. Please choose another.")
             from_file = input("New File Name: ")
             noError = False
+            isError()
 
     indata = in_file.read()
 
