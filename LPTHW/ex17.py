@@ -33,13 +33,15 @@ finally:
             noError = True
             #isError()
         except FileNotFoundError:
-            print(f"File '{from_file}' was not found. Please choose a file that exists.")
-            from_file = input("New File Name: ")
+            noError = False
             #isError()
+            print(f"File '{from_file}' was not found. Please choose a file that exists.")
+            from_file = input("New File Name: ") 
         except:
+            noError = False
+            #isError()
             print(f"There was a problem opening '{from_file}'. Please choose another.")
             from_file = input("New File Name: ")
-            #isError()
 
     indata = in_file.read()
 
