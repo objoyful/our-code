@@ -17,4 +17,4 @@ A clear and concise description of what the bug is.
 If applicable, add screenshots to help explain your problem.
 
 **Python Version (please complete the following information):**
- - Python Version (EX: 3.7.4, 3.8 BETA)
+ - Python Version (EX: 2.7.18, 3.8.8, 3.9.2)
