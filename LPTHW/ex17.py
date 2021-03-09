@@ -12,49 +12,23 @@ except:
     
     from_file = input("Argument Number 1: ")
     to_file = input("Argument Number 2: ")
-finally:
-    print(f"Copying from {from_file} to {to_file}")
 
-    def isError():
-        if noError==True:
-            print("There is no error yet")
-        elif noError==False:
-            print("There is an error.")
-        elif noError==None:
-            print("The program just started.")
-        else:
-            print("Something else...")
+print(f"Copying from {from_file} to {to_file}")
 
-    noError = None
-    #isError()
-    while noError!=True:
-        try:
-            in_file = open(from_file)
-            noError = True
-            #isError()
-        except FileNotFoundError:
-            noError = False
-            #isError()
-            print(f"File '{from_file}' was not found. Please choose a file that exists.")
-            from_file = input("New File Name: ") 
-        except:
-            noError = False
-            #isError()
-            print(f"There was a problem opening '{from_file}'. Please choose another.")
-            from_file = input("New File Name: ")
+in_file = open(from_file)
 
-    indata = in_file.read()
+indata = in_file.read()
 
-    print(f"The input file is {len(indata)} bytes long")
+print(f"The input file is {len(indata)} bytes long")
 
-    print(f"Does the output file exist? {exists(to_file)}")
-    print("Ready, hit RETURN to continue, CTRL-C to abort.")
-    input()
+print(f"Does the output file exist? {exists(to_file)}")
+print("Ready, hit RETURN to continue, CTRL-C to abort.")
+input()
 
-    out_file = open(to_file, 'w')
-    out_file.write(indata)
+out_file = open(to_file, 'w')
+out_file.write(indata)
 
-    print("Alright, all done.")
+print("Alright, all done.")
 
-    out_file.close()
-    in_file.close()
+out_file.close()
+in_file.close()

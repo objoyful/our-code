@@ -1,6 +1,16 @@
+# pylint: disable=unbalanced-tuple-unpacking
 from sys import argv
 
-script, input_file = argv
+try:
+    script, input_file = argv
+except:
+    argNum = 2
+    script = argv[0]
+    print(f"You need to pass {argNum - 1} argument(s). You only passed {len(argv) - 1}")
+    print("Please type the missing arguments below:")
+    
+    input_file = input("Argument Number 1: ")
+
 
 def print_all(f):
     print(f.read())

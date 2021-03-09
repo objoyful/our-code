@@ -13,8 +13,8 @@ except:
     first = input("Argument Number 1: ")
     second = input("Argument Number 2: ")
     third = input("Argument Number 3: ")
-finally:
-    print("The script is called:", script)
-    print("Your first variable is:", first)
-    print("Your second variable is:", second)
-    print("Your third variable is:", third)
+
+print("The script is called:", script)
+print("Your first variable is:", first)
+print("Your second variable is:", second)
+print("Your third variable is:", third)

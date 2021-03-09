@@ -10,10 +10,20 @@
 # One problem: there is a lot of wasted space. Instead of each character being 1 byte it's 4. Imagine taking up 4 times as much space on your hard drive.
 # So what they did was still use 8 bit for the most common characters, but then escape into 32 bit when rare ones come up.
 
-
+# pylint: disable=unbalanced-tuple-unpacking
 import sys
-script, input_encoding, error = sys.argv # pylint: disable=unbalanced-tuple-unpacking <-- I have to do that so I don't get weird errors.
-
+try:
+    script, input_encoding, error = sys.argv
+except:
+    argv = sys.argv
+    
+    argNum = 3
+    script = argv[0]
+    print(f"You need to pass {argNum - 1} argument(s). You only passed {len(argv) - 1}")
+    print("Please type the missing arguments below:")
+    
+    input_encoding = input("Argument Number 1: ")
+    error = input("Argument Number 2: ")
 
 def main(language_file, encoding, errors):
     line = language_file.readline()
