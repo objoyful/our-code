@@ -13,3 +13,4 @@ env-test/
 requirements-txt-env/
 /calb.py
 HangMan/
+/LPTHW/__pycache__/
