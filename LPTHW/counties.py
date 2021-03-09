@@ -1,6 +1,4 @@
 #cSpell: disable
-counties = ['Apache', 'Cochise', 'Coconino', 'Gila', 'Graham', 'Greenlee', 'La Paz',
-            'Maricopa', 'Mohave', 'Pima', 'Pinal', 'Santa Cruz', 'Yavapai', 'Yuma']
 cities = {
     'Apache': 'St. Johns',
     'Cochise': 'Bisbee',
@@ -18,8 +16,5 @@ cities = {
     'Yuma': 'Yuma'
 }
 
-i = 0
-
-while i <= len(counties) - 1:
-    print(f"{counties[i]}'s county seat is {cities[counties[i]]}.")
-    i += 1
+for county in cities:
+    print(f"{county}'s county seat is {cities[county]}.")
