@@ -61,4 +61,3 @@ print(f"Groundspeed: {vehicle.groundspeed}") # This is settable
 
 # What is the actual Flight Mode?
 print(f"Mode :{vehicle.mode.name}") # This is settable
-
