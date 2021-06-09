@@ -6,19 +6,10 @@ try:
 except:
     argNum = 2
     script = argv[0]
-<<<<<<< Updated upstream
-    print(f"You need to pass {argNum - 1} argument(s). You only passed {len(argv) - 1}")
-    print("Please type the missing arguments below:")
-    
-    input_file = input("Argument Number 1: ")
-
-
-=======
     print(f"You need to pass {argNum - 1} arguments. You only passed {len(argv) - 1}")
     print("Please type the missing arguments below:")
     
     input_file = input("Argument Number 1: ")
->>>>>>> Stashed changes
 def print_all(f):
     print(f.read())
 
