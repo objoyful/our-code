@@ -35,7 +35,7 @@ filelock
 flake8
 Flask
 future
-#gitdb2
+gitdb2<4.0.2
 GitPython
 green
 idna
@@ -56,7 +56,7 @@ MarkupSafe
 marshmallow
 mccabe
 more-itertools
-#mypy
+mypy<0.400
 mypy-extensions
 nose
 packaging
@@ -85,7 +85,7 @@ regex
 requests
 robotframework
 robotframework-seleniumlibrary
-rsa==4.5
+rsa<4.7
 s3transfer
 selenium
 shortuuid

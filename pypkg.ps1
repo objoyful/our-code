@@ -5,4 +5,4 @@ py -2 -m pip install -r .\Packages\pip-python2.txt --upgrade --user
 py -3.8 -m pip install -r .\Packages\requirements.txt --upgrade --user
 py -3.8 -m pip install -r .\Packages\pip.txt --upgrade --user
 py -3 -m pip install -r .\Packages\requirements.txt --upgrade --user
-py -3 -m pip install -r .\Packages\pip-python3.9.txt --upgrade --user
+py -3 -m pip install -r .\Packages\pip.txt --upgrade --user

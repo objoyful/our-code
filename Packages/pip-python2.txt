@@ -8,8 +8,8 @@ scikit-image
 pandas
 pillow
 jupyter
-#mglearn
-#statsmodels
+mglearn<0.1.7
+statsmodels<0.11
 keras
 #tensorflow
 graphviz
@@ -20,5 +20,5 @@ opencv-python==4.2.0.32
 opencv-contrib-python==4.2.0.32
 pygame
 lxml
-MAVProxy
+MAVProxy==1.8.20
 monotonic
