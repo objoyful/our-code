@@ -20,5 +20,5 @@ opencv-python<4.2.0.38
 opencv-contrib-python<4.2.0.38
 pygame
 lxml
-MAVProxy<1.8.20
+MAVProxy<1.8.21
 monotonic
