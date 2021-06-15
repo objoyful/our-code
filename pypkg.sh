@@ -1,6 +1,7 @@
 #Install packages for Drone Dojo
 sudo apt install -y python3.9 python3-pip python2 python-dev python3-dev python3-wxgtk4.0 python3-yaml vim git screen libffi-dev build-essential autoconf libtool pkg-config python3-opengl python-pil idle-python2.7 pyqt5-dev-tools libqscintilla2-qt5-designer python3-qtpy libgle3 python-dev libssl-dev python3.9-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl
-python2 ./Packages/get-pip.py --user
+python2 ./Packages/get-pip-python2.py --user
+python3.9 ./Packages/get-pip.py --user
 sudo usermod -a -G dialout $USER
 
 #Python 2
