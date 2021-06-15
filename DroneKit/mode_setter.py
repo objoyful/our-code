@@ -30,3 +30,22 @@ def connectCopter():
 
 #Main Executable
 vehicle = connectCopter()
+
+sec = 0
+while not vehicle.is_armable:
+    print(f"Vehicle is not armable. ({sec} sec.)")
+    time.sleep(1)
+    sec += 1
+
+print("The vehicle is ready to be armed.")
+
+vehicle.mode = "GUIDED"
+sec = 0
+print(VehicleMode("GUIDED"), "Before loop")
+while vehicle.mode != "GUIDED":
+    print(f"Putting vehicle into Guided mode. ({sec} sec.)")
+    print(vehicle.mode)
+    time.sleep(1)
+    sec += 1
+
+print("Vehicle is now in Guided mode.")
