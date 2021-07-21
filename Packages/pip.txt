@@ -16,7 +16,6 @@ graphviz
 Django
 dronekit
 dronekit-sitl
-opencv-python
 opencv-contrib-python
 pygame
 lxml
