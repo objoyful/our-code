@@ -76,7 +76,7 @@ pyflakes
 Pygments
 pylint
 pyparsing
-pyte
+pyte<0.8
 pytest
 python-dateutil
 pytz
