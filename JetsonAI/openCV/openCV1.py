@@ -10,7 +10,7 @@ camSet = 'nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3264, height=2464, 
 piCam = cv2.VideoCapture(camSet)
 webCam = cv2.VideoCapture(1)
 
-dualCams = False
+dualCams = True
 singleCam = webCam
 
 while True:
