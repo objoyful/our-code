@@ -5,7 +5,7 @@ atlassian-python-api
 atomicwrites
 attrs
 autopep8
-aws-sam-cli
+#aws-sam-cli
 aws-sam-translator
 Babel
 backcall
@@ -24,7 +24,7 @@ click
 colorama
 cookiecutter
 coverage
-dateparser
+#dateparser
 decorator
 docker
 docker-pycreds
@@ -81,7 +81,7 @@ pytest
 python-dateutil
 pytz
 PyYAML
-regex
+#regex
 requests
 robotframework
 robotframework-seleniumlibrary
