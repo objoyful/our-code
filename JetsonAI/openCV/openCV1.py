@@ -10,12 +10,12 @@ camSet = 'nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3264, height=2464, 
 piCam = cv2.VideoCapture(camSet)
 webCam = cv2.VideoCapture(1)
 
+# Web cam or pi cam setting
 cam = webCam
 
 while True:
     ret, frame = cam.read()
-    name = 'Camera'
-    cv2.imshow(name, frame)
+    cv2.imshow('Camera', frame)
 
     if cv2.waitKey(1) == ord('q'):
         break
