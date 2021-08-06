@@ -10,12 +10,12 @@ flip = 4
 
 camSet = 'nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method=' + str(flip) + ' ! video/x-raw, width=' + str(dispW) + ', height=' + str(dispH) + ', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'
 
-#piCam = cv2.VideoCapture(camSet)
-cam = cv2.VideoCapture(1)
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, dispW)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, dispH)
+piCam = cv2.VideoCapture(camSet)
+webCam = cv2.VideoCapture(1)
+webCam.set(cv2.CAP_PROP_FRAME_WIDTH, dispW)
+webCam.set(cv2.CAP_PROP_FRAME_HEIGHT, dispH)
 
-#cam = webCam
+cam = webCam
 
 while True:
     ret, frame = cam.read()
