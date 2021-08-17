@@ -39,7 +39,6 @@ while True:
 
     cv2.imshow('Camera', frame)
     cv2.moveWindow('Camera', 0, 0)
-    
 
     posX = posX + dx
     posY = posY + dy
