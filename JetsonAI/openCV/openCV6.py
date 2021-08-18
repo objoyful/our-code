@@ -19,14 +19,14 @@ h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 w2 = int(w / 2)
 h2 = int(h / 2)
 
-BW = int(0.15 * w)
-BH = int(0.25 * h)
+BW = int(0.25 * w)
+BH = int(0.15 * h)
 
 posX = 10
 posY = 270
 
-dx = 2
-dy = 2
+dx = 6
+dy = 6
 
 while True:
     ret, frame = cam.read()
@@ -42,6 +42,11 @@ while True:
 
     posX = posX + dx
     posY = posY + dy
+
+    if posX <= 0 or posX + BW >= w:
+        dx = dx * (-1)
+    if posY <= 0 or posY + BH >= h:
+        dy = dy * (-1)
 
     if cv2.waitKey(1) == ord('q'):
         break
