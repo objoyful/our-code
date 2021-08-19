@@ -19,34 +19,27 @@ h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 w2 = int(w / 2)
 h2 = int(h / 2)
 
-BW = int(0.25 * w)
-BH = int(0.15 * h)
-
-posX = 10
-posY = 270
-
-dx = 6
-dy = 6
-
 while True:
     ret, frame = cam.read()
 
     if not ret:
         print("Camera malfunction")
         break
+    
+    roi = frame[200:600, 500:800].copy()
+    roiGray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+    roiGray = cv2.cvtColor(roiGray, cv2.COLOR_GRAY2BGR)
 
-    frame = cv2.rectangle(frame, (posX, posY), (posX + BW, posY + BH), (255, 0, 0), -1)
+    frame[200:600, 500:800] = roiGray[:]
+    
+    cv2.imshow('ROI', roi)
+    cv2.moveWindow('ROI', w + 80, 0)
+
+    cv2.imshow('ROI Gray', roiGray)
+    cv2.moveWindow('ROI Gray', w + 80, 400)
 
     cv2.imshow('Camera', frame)
     cv2.moveWindow('Camera', 0, 0)
-
-    posX = posX + dx
-    posY = posY + dy
-
-    if posX <= 0 or posX + BW >= w:
-        dx = dx * (-1)
-    if posY <= 0 or posY + BH >= h:
-        dy = dy * (-1)
 
     if cv2.waitKey(1) == ord('q'):
         break
