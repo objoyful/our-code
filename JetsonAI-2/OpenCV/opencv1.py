@@ -7,9 +7,11 @@ camSet='nvarguscamerasrc ! video/x-raw(memory:NVMM), width=3264, height=2464, fo
 #cam=cv2.VideoCapture(camSet)
 cam=cv2.VideoCapture(0)
 while True:
+    
     ret, frame=cam.read()
     cv2.imshow('nanoCam',frame)
     if cv2.waitKey(1)==ord('q'):
+        print('you broke it')
         break
 cam.release()
 cv2.destroyAllWindows()
