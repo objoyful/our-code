@@ -18,7 +18,6 @@ cam=cv2.VideoCapture(0)
 while True:
     
     ret, frame=cam.read()
-    cv2.imshow('nanoCam',frame)
     cv2.imshow('img1',img1)
     cv2.imshow('img2',img2)
     cv2.imshow('bitAnd',bitAnd)
@@ -30,6 +29,8 @@ while True:
     cv2.moveWindow('bitOr',640,450)
     cv2.moveWindow('bitAnd',1280,450)
     cv2.moveWindow('bitXor',1280,0)
+    frame=cv2.bitwise_and(frame,frame,mask=bitXor)
+    cv2.imshow('nanoCam',frame)
     if cv2.waitKey(1)==ord('q'):
         print('you broke it')
         print('oof')
