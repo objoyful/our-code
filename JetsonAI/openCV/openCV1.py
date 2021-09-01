@@ -1,4 +1,5 @@
 import cv2
+print(cv2.__version__)
 
 dispW = 320 * 2
 dispH = 240 * 2
