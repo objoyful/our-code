@@ -10,6 +10,7 @@ while True:
     
     ret, frame=cam.read()
     cv2.imshow('nanoCam',frame)
+    cv2.moveWindow('nanoCam',0,0)
     if cv2.waitKey(1)==ord('q'):
         print('you broke it')
         break
