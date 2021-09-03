@@ -5,8 +5,14 @@
 #Create symbolic link from locale library to xlocale library
 sudo ln -s /usr/include/locale.h /usr/include/xlocale.h
 
-#Give user permissions to access MAVLink
+#Give user permissions
 sudo usermod -a -G dialout $USER
+sudo usermod -aG i2c $USER
+sudo groupadd -f -r gpio
+sudo usermod -a -G gpio $USER
+
+sudo cp -r /lib/udev/rules.d/ /etc/udev/
+sudo udevadm control --reload-rules && sudo udevadm trigger
 
 #Check Ubuntu version
 version=$(lsb_release -r --short)
