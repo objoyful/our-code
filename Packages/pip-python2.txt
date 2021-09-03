@@ -16,7 +16,9 @@ graphviz
 Django
 dronekit
 dronekit-sitl
+#opencv-contrib-python
 pygame
 lxml
 MAVProxy<1.8.21
 monotonic
+adafruit-circuitpython-servokit
