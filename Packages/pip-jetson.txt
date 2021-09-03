@@ -21,3 +21,4 @@ pygame
 lxml
 MAVProxy
 monotonic
+adafruit-circuitpython-servokit
