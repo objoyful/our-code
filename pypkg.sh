@@ -35,5 +35,8 @@ else
     python3.9 -m pip install -r ./Packages/pip.txt -U --user
 fi
 
-#Give user permissions to access MAVLink
+#Give user permissions
 sudo usermod -a -G dialout $USER
+sudo usermod -aG i2c $USER
+sudo groupadd -f -r gpio
+sudo usermod -a -G gpio $USER
