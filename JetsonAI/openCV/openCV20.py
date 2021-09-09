@@ -1,7 +1,16 @@
 import cv2
 import numpy as np
+from adafruit_servokit import ServoKit
+
+kit = ServoKit(channels = 16)
 
 print(cv2.__version__)
+
+pan = 90
+tilt = 90
+
+kit.servo[0].angle = pan
+kit.servo[1].angle = tilt
 
 def nothing(x):
     pass
@@ -22,22 +31,24 @@ cam = webCam
 w = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
 h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
+print(w, h)
+
 w2 = int(w / 2)
 h2 = int(h / 2)
 
 cv2.namedWindow('Trackbars')
 
-cv2.createTrackbar('Lower Hue', 'Trackbars', 50, 179, nothing)
+cv2.createTrackbar('Lower Hue', 'Trackbars', 90, 179, nothing)
 cv2.createTrackbar('Higher Hue', 'Trackbars', 100, 179, nothing)
 
-cv2.createTrackbar('Lower Hue #2', 'Trackbars', 50, 179, nothing)
+cv2.createTrackbar('Lower Hue #2', 'Trackbars', 200, 179, nothing)
 cv2.createTrackbar('Higher Hue #2', 'Trackbars', 100, 179, nothing)
 
-cv2.createTrackbar('Lower Saturation', 'Trackbars', 100, 255, nothing)
-cv2.createTrackbar('Higher Saturation', 'Trackbars', 255, 255, nothing)
+cv2.createTrackbar('Lower Saturation', 'Trackbars', 50, 255, nothing)
+cv2.createTrackbar('Higher Saturation', 'Trackbars', 200, 255, nothing)
 
-cv2.createTrackbar('Lower Value', 'Trackbars', 100, 255, nothing)
-cv2.createTrackbar('Higher Value', 'Trackbars', 255, 255, nothing)
+cv2.createTrackbar('Lower Value', 'Trackbars', 50, 255, nothing)
+cv2.createTrackbar('Higher Value', 'Trackbars', 200, 255, nothing)
 
 #cv2.imshow('Trackbars')
 
@@ -88,11 +99,46 @@ while True:
         linX = x + int(boxW / 2)
         linY = y + int(boxH / 2)
 
-        if area >= 200:
+        if area >= 50:
             #cv2.drawContours(frame, [cnt], 0, (0, 0, 255), 3)
-            #cv2.rectangle(frame, (x, y), (x + boxW, y + boxH), (255, 0, 0), 15)
-            cv2.line(frame, (linX, 0), (linX, h), (0, 255, 0), 5)
-            cv2.line(frame, (0, linY), (w, linY), (0, 255, 0), 5)
+            
+            cv2.rectangle(frame, (x, y), (x + boxW, y + boxH), (255, 0, 0), 15)
+            
+            # cv2.line(frame, (linX, 0), (linX, h), (0, 255, 0), 5)
+            # cv2.line(frame, (0, linY), (w, linY), (0, 255, 0), 5)
+
+            objX = x + boxW / 2
+            objY = y + boxH / 2
+
+            errorPan = objX - w2
+            errorTilt = objY - h2
+
+            if abs(errorPan) > 15:
+                pan = pan - errorPan / 43
+
+            if abs(errorTilt) > 15:
+                tilt = tilt + errorTilt / 43
+
+            if pan > 180:
+                pan = 180
+                print("Pan Out of Range")
+
+            if pan < 0:
+                pan = 0
+                print("Pan Out of Range")
+
+            if tilt > 180:
+                tilt = 180
+                print("Tilt Out of Range")
+
+            if tilt < 0:
+                tilt = 0
+                print("Tilt Out of Range")
+            
+            kit.servo[0].angle = pan
+            kit.servo[1].angle = tilt
+
+            break
 
     cv2.moveWindow('Trackbars', 2 * w + 100, 0)    
     
