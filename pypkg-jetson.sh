@@ -11,7 +11,7 @@ sudo usermod -aG i2c $USER
 sudo groupadd -f -r gpio
 sudo usermod -a -G gpio $USER
 
-sudo cp -r /lib/udev/rules.d/ /etc/udev/
+#sudo cp -r /lib/udev/rules.d/ /etc/udev/
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
 #Check Ubuntu version
@@ -24,7 +24,7 @@ if [ $(echo "${version} < 20.04" | bc) -eq 1 ]
         less_than_20=true
         
         #Install Linux packages
-        sudo apt install -y python3.8 python3-dev python3-wxgtk4.0 python3-yaml vim git screen libffi-dev build-essential autoconf libtool pkg-config python3-opengl python-pil pyqt5-dev-tools libqscintilla2-qt5-designer python3-qtpy libgle3 libssl-dev python3.8-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev python3-setuptools python3-dev python3 libportmidi-dev libhdf5-dev libxml2-dev libxslt-dev cython gfortran libatlas-base-dev libcanberra-gtk-module
+        sudo apt install -y python3.8 python3-dev python3-wxgtk4.0 python3-yaml vim git screen libffi-dev build-essential autoconf libtool pkg-config python3-opengl python-pil pyqt5-dev-tools libqscintilla2-qt5-designer python3-qtpy libgle3 libssl-dev python3.8-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev python3-setuptools python3-dev python3 libportmidi-dev libhdf5-dev libxml2-dev libxslt-dev cython gfortran libatlas-base-dev libcanberra-gtk-module python3-opencv
         sudo apt build-dep libsdl2 libsdl2-image libsdl2-mixer libsdl2-ttf libfreetype6 python3 libportmidi0
         
         #Install pip
@@ -38,7 +38,7 @@ else
     less_than_20=false
     
     #Install Linux packages
-    sudo apt install -y python-is-python3 python3.9 python3-dev python3-wxgtk4.0 python3-yaml vim git screen libffi-dev build-essential autoconf libtool pkg-config python3-opengl python-pil pyqt5-dev-tools libqscintilla2-qt5-designer python3-qtpy libgle3 libssl-dev python3.9-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev python3-setuptools python3-dev python3 libportmidi-dev libhdf5-dev libxml2-dev libxslt-dev cython gfortran libatlas-base-dev libcanberra-gtk-module
+    sudo apt install -y python-is-python3 python3.9 python3-dev python3-wxgtk4.0 python3-yaml vim git screen libffi-dev build-essential autoconf libtool pkg-config python3-opengl python-pil pyqt5-dev-tools libqscintilla2-qt5-designer python3-qtpy libgle3 libssl-dev python3.9-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev python3-setuptools python3-dev python3 libportmidi-dev libhdf5-dev libxml2-dev libxslt-dev cython gfortran libatlas-base-dev libcanberra-gtk-module python3-opencv
     sudo apt build-dep libsdl2 libsdl2-image libsdl2-mixer libsdl2-ttf libfreetype6 python3 libportmidi0
     
     #Install pip
