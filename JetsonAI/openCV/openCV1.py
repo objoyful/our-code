@@ -14,11 +14,8 @@ webCam = cv2.VideoCapture(1)
 # Web cam or pi cam setting
 cam = webCam
 
-w = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
-h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-w2 = int(w / 2)
-h2 = int(h / 2)
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, dispW)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, dispH)
 
 while True:
     ret, frame = cam.read()
