@@ -39,7 +39,9 @@ while True:
         eyes = eye_cascade.detectMultiScale(roi_gray, 1.3, 5)
 
         for (xEye, yEye, wEye, hEye) in eyes:
-            cv2.rectangle(roi_color, (xEye, yEye), (xEye + wEye, yEye + hEye), (255, 255, 255), 2)
+            #cv2.rectangle(roi_color, (xEye, yEye), (xEye + wEye, yEye + hEye), (255, 255, 255), 2)
+            cv2.circle(roi_color, (int(xEye + wEye / 2), int(yEye + hEye / 2)), 8, (255, 255, 255), -1)
+            cv2.circle(roi_color, (int(xEye + wEye / 2), int(yEye + hEye / 2)), 4, (0, 0, 0), -1)
     
     cv2.imshow('Camera', frame)
     cv2.moveWindow('Camera', 0, 0)
