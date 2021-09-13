@@ -28,13 +28,9 @@ webCam = cv2.VideoCapture(1)
 # Web cam or pi cam setting
 cam = webCam
 
-w = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
-h = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, dispW)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, dispH)
 
-print(w, h)
-
-w2 = int(w / 2)
-h2 = int(h / 2)
 
 cv2.namedWindow('Trackbars')
 
@@ -87,9 +83,9 @@ while True:
 
     FGmask = cv2.add(FGmask1, FGmask2)
     cv2.imshow('FG Mask', FGmask)
-    cv2.moveWindow('FG Mask', w + 60, 0)
+    cv2.moveWindow('FG Mask', dispW + 60, 0)
 
-    _, contours, _ = cv2.findContours(FGmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(FGmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     contours = sorted(contours, key = lambda x:cv2.contourArea(x), reverse = True)
 
     for cnt in contours:
@@ -110,8 +106,8 @@ while True:
             objX = x + boxW / 2
             objY = y + boxH / 2
 
-            errorPan = objX - w2
-            errorTilt = objY - h2
+            errorPan = objX - dispW / 2
+            errorTilt = objY - dispH / 2
 
             if abs(errorPan) > 15:
                 pan = pan - errorPan / 43
@@ -140,7 +136,7 @@ while True:
 
             break
 
-    cv2.moveWindow('Trackbars', 2 * w + 100, 0)    
+    cv2.moveWindow('Trackbars', 2 * dispW + 100, 0)    
     
     cv2.imshow('Camera', frame)
     cv2.moveWindow('Camera', 0, 0)
