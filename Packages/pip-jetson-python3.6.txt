@@ -22,3 +22,15 @@ lxml
 MAVProxy
 monotonic
 adafruit-circuitpython-servokit
+testresources
+setuptools
+future
+mock
+h5py
+keras_preprocessing
+keras_applications
+gast
+futures
+protobuf
+pybind11
+face_recognition
