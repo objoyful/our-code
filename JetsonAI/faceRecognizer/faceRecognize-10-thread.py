@@ -1,24 +1,31 @@
 from threading import Thread
 import time
 
-def BigBox():
+def BigBox(color, l, w):
     while True:
-        print('Big Box is Open')
+        print(color, 'Box is Open of length', l, 'and width', w)
         time.sleep(5)
         
-        print('Big Box is Closed')
+        print(color, 'Box is Closed of length', l, 'and width', w)
         time.sleep(5)
 
-def SmallBox():
+def SmallBox(color, l, w):
     while True:
-        print('Small Box is Open')
+        print(color, 'Box is Open of length', l, 'and width', w)
         time.sleep(1)
 
-        print("Small Box is Closed")
+        print(color, 'Box is Closed of length', l, 'and width', w)
         time.sleep(1)
 
-bigBoxThread = Thread(target = BigBox, args = ())
-smallBoxThread = Thread(target = SmallBox, args = ())
+c = 'red'
+x = 5
+y = 6
+bigBoxThread = Thread(target = BigBox, args = (c, x, y))
+
+c = 'blue'
+x = 4
+y = 6
+smallBoxThread = Thread(target = SmallBox, args = (c, x, y))
 
 bigBoxThread.daemon = True
 smallBoxThread.daemon = True
