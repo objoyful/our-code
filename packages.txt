@@ -1,22 +1,47 @@
-cSpell: Disable
+[LINUX] APT: python3-dev python3 libpython3-dev vim git screen libffi-dev build-essential autoconf libtool pkg-config pyqt5-dev-tools libqscintilla2-qt5-designer libgle3 libssl-dev gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev  libportmidi-dev libhdf5-dev libxml2-dev libxslt-dev cython gfortran libatlas-base-dev libcanberra-gtk-module hdf5-tools libblas-dev libhdf5-serial-dev liblapack-dev cmake libopenblas-dev liblapack-dev libjpeg-dev v4l-utils
+python-is-python3
 
-These are all the packages we will need.
+[LINUX] APT Build-Dep: libsdl2 libsdl2-image libsdl2-mixer libsdl2-ttf libfreetype6 python3 libportmidi0
 
-Windows:
+[LINUX] APT install and remove opencv-python
 
-pip install --user <packages>
+[LINUX] Download & Install DLib
+wget http://dlib.net/files/dlib-19.17.tar.bz2 
 
-Linux:
+[LINUX] Perms:
+sudo usermod -a -G dialout $USER
+sudo usermod -aG i2c $USER
+sudo groupadd -f -r gpio
+sudo usermod -a -G gpio $USER
 
-sudo apt install python3-pip
-pip3 install --user <packages>
-sudo apt install python3-opencv
+[LINUX] Copy locale file:
+sudo ln -s /usr/include/locale.h /usr/include/xlocale.h
 
-Packages:
+==========================================================
 
-Windows:
-opencv-python numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras tensorflow
+[JETSON] Create Proccessor type varible:
+echo "export OPENBLAS_CORETYPE=ARMV8" >> ~/.bashrc
 
-Linux:
-numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras tensorflow
-Do 'sudo apt install python3-opencv' to install OpenCV.
+[JETSON] ADD GPIO Rules:
+sudo cp -r /lib/udev/rules.d/ /etc/udev/
+sudo wget -P /etc/udev/rules.d/ https://raw.githubusercontent.com/pjueon/JetsonGPIO/master/99-gpio.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
+
+[JETSON] Install swap file
+git clone https://github.com/JetsonHacksNano/installSwapfile
+installSwapfile.sh
+
+[JETSON] Install Jetson Inference
+git clone --recursive https://github.com/dusty-nv/jetson-inference
+mkdir build
+cmake ../
+Select #1 and #12 and #43
+Install PyTorch Python 3.6
+make -j$(nproc)
+sudo make install
+sudo ldconfig
+=========================================================
+
+PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast futures protobuf pybind11 face_recognition qtpy pyopengl pyyaml wxPython
+PIP Desktop: tensorflow
+PIP Windows: opencv-python
