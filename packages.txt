@@ -35,7 +35,7 @@ installSwapfile.sh
 git clone --recursive https://github.com/dusty-nv/jetson-inference
 mkdir build
 cmake ../
-Select #1 and #12 and #43
+Select #1 and #12 and #43s
 Install PyTorch Python 3.6
 make -j$(nproc)
 sudo make install

@@ -70,7 +70,7 @@ while True:
     cv2.imshow('FGmaskComp',FGmaskComp)
     cv2.moveWindow('FGmaskComp',0,0)
  
-    contours,_=cv2.findContours(FGmaskComp,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    contouqqrs,_=cv2.findContours(FGmaskComp,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     contours=sorted(contours,key=lambda x:cv2.contourArea(x),reverse=True)
     for cnt in contours:
         area=cv2.contourArea(cnt)
