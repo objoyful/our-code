@@ -49,8 +49,10 @@ Install PyTorch Python 3.6
 make -j$(nproc)
 sudo make install
 sudo ldconfig
+
 =========================================================
 
+Install Pip: python3 get-pip.py
 PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast futures protobuf pybind11 face_recognition qtpy pyopengl pyyaml wxPython
 PIP Desktop: tensorflow
 PIP Windows: opencv-python
