@@ -5,9 +5,6 @@ python-is-python3
 
 [LINUX] APT install and remove opencv-python
 
-[LINUX] Download & Install DLib
-wget http://dlib.net/files/dlib-19.17.tar.bz2 
-
 [LINUX] Perms:
 sudo usermod -a -G dialout $USER
 sudo usermod -aG i2c $USER
@@ -26,6 +23,14 @@ echo "export OPENBLAS_CORETYPE=ARMV8" >> ~/.bashrc
 sudo cp -r /lib/udev/rules.d/ /etc/udev/
 sudo wget -P /etc/udev/rules.d/ https://raw.githubusercontent.com/pjueon/JetsonGPIO/master/99-gpio.rules
 sudo udevadm control --reload-rules && sudo udevadm trigger
+
+[JETSON] Download & Install DLib
+wget http://dlib.net/files/dlib-19.17.tar.bz2
+tar jxvf
+cd dlib/cuda
+cudann_dlibapi.cpp
+comment out forward_algo = forward_best_algo
+sudo python3 setup.py install
 
 [JETSON] Install swap file
 git clone https://github.com/JetsonHacksNano/installSwapfile
