@@ -9,8 +9,8 @@ fpsFiltered = 0
 
 net = jetson.inference.detectNet('ssd-mobilenet-v2', threshold = 0.5)
 
-dispW = 1920
-dispH = 1080
+dispW = 1280
+dispH = 720
 
 flip = 4
 
@@ -47,13 +47,21 @@ while True:
     for detect in detections:
         ID = detect.ClassID
         
-        top = detect.Top
-        left = detect.Left
-        bottom = detect.Bottom
-        right = detect.Right
+        top = int(detect.Top)
+        left = int(detect.Left)
+        bottom = int(detect.Bottom)
+        right = int(detect.Right)
 
         item = net.GetClassDesc(ID)
-        print(item, top, left, bottom, right)
+        # print(item, top, left, bottom, right)
+
+        tk = 3
+
+        if item == 'cat':
+            tk = -1
+
+        cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), tk)
+        cv2.putText(img, item, (left, top + 20), font, 1, (0, 0, 255), 2)
 
     dt = time.time() - timeStamp
     timeStamp = time.time()
