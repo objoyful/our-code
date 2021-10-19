@@ -4,9 +4,9 @@ import pyttsx3
 engine = pyttsx3.init()
 
 engine.setProperty('rate', 150)
-engine.setProperty('voice', 'english+m4')
+engine.setProperty('voice', 'english+f4')
 
-text = 'test test'
+text = 'test test test'
 
 engine.say(text)
 engine.runAndWait()
