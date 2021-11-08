@@ -60,7 +60,7 @@ sudo gedit /etc/fstab
 =========================================================
 
 Install Pip: python3 get-pip.py
-PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast futures protobuf pybind11 qtpy pyopengl pyyaml wxPython cmake pyttsx3 gTTS
+PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast "futures<3" protobuf pybind11 qtpy pyopengl pyyaml wxPython cmake pyttsx3 gTTS
 PIP CUDA: face_recognition
 PIP Desktop: tensorflow
 PIP Windows: opencv-python
