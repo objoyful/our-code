@@ -14,6 +14,6 @@ requirements-txt-env/
 /calb.py
 HangMan/
 /LPTHW/__pycache__/
-/OpenCV/output.avi
 /DeepLearning/Kaggle/
-JetsonAI/NVIDIA/output.mp3
+*.avi
+*.mp3
