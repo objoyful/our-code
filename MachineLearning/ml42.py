@@ -1,19 +1,24 @@
 import matplotlib.pyplot as plt
 from matplotlib import style
-from numpy.lib.arraysetops import unique
+from sklearn.datasets import make_blobs
+import random
+
+centers = random.randrange(2, 8)
+X, y = make_blobs(n_samples = 50, centers = centers, n_features = 2)
+
 style.use('ggplot')
 
 import numpy as np
 
-X = np.array([[1, 2],
-              [1.5, 1.8],
-              [5, 8],
-              [8, 8],
-              [1, 0.6],
-              [9, 11],
-              [8, 2],
-              [10, 2],
-              [9, 3],])
+# X = np.array([[1, 2],
+#               [1.5, 1.8],
+#               [5, 8],
+#               [8, 8],
+#               [1, 0.6],
+#               [9, 11],
+#               [8, 2],
+#               [10, 2],
+#               [9, 3],])
 
 # plt.scatter(X[:, 0], X[:, 1], s = 150)
 # plt.show()
@@ -105,20 +110,30 @@ class MeanShift:
 
         for i in range(len(self.centroids)):
             self.claffications[i] = []
+
+        for featureset in data:
+            distances = [np.linalg.norm(featureset - self.centroids[centroid]) for centroid in self.centroids]
+            classification = distances.index(min(distances))
+            self.claffications[classification].append(featureset)
         
         
     
     def predict(self, data):
-        pass
+        distances = [np.linalg.norm(featureset - self.centroids[centroid]) for centroid in self.centroids]
+        classification = distances.index(min(distances))
+        return classification
 
 clf = MeanShift()
 clf.fit(X)
 
+for classification in clf.claffications:
+    color = colors[classification]
+    for featureset in clf.claffications[classification]:
+        plt.scatter(featureset[0], featureset[1], marker = '*', color = color)
+
 centroids = clf.centroids
 
-plt.scatter(X[:, 0], X[:, 1], s = 150)
-
 for c in centroids:
-    plt.scatter(centroids[c][0], centroids[c][1], color = 'k', s = 150, marker = '*')
+    plt.scatter(centroids[c][0], centroids[c][1], color = 'k', s = 150, marker = 'X')
 
 plt.show()
