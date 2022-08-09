@@ -67,4 +67,4 @@ PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow 
 PIP CUDA (3.9): face_recognition
 PIP Desktop (3.9): tensorflow tensorflow_datasets tflearn
 PIP Windows: opencv-python
-Python 3.9: cvxopt wxPython
+Python 3.9: wxPython
