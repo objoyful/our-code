@@ -44,9 +44,3 @@ def neural_network_model(data):
     output = tf.matmul(l3, output_layer['weights']) + output_layer['biases']
 
     return output
-
-    l1 = tf.add(tf.matmul(data, hidden_1_layer['weights']) + hidden_1_layer['biases'])
-    l1 = tf.nn.relu(l1)
-
-    l2 = tf.add(tf.matmul(data, hidden_1_layer['weights']) + hidden_1_layer['biases'])
-    l2 = tf.nn.relu(l1)
