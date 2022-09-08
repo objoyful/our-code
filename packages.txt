@@ -61,6 +61,10 @@ sudo gedit /etc/fstab
 https://www.roboti.us/download.html
 https://www.roboti.us/license.html
 
+pip install pipwin
+pipwin install gdal
+pipwin install fiona
+
 Install Pip: python3 get-pip.py
 PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast "futures<3" protobuf pybind11 qtpy pyopengl pyyaml cmake pyttsx3 gTTS quandl kaggle pydicom tqdm gym[all] cython xgboost google-cloud-bigquery geopandas eli5
 
