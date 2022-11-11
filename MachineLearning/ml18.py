@@ -1,12 +1,14 @@
+# Import Libraries
 from math import sqrt
 import numpy as np
 from collections import Counter
 import warnings
 import pandas as pd
 import random
+from ml15 import find_distance
 
-
-def k_nearest_neighbors(data, predict, k = 3):
+# K Nearest Neighbors Algorithm
+def k_nearest_neighbors(data, predict, k=3):
     if len(data) >= k:
         warnings.warn('K is set to a value less than total voting groups!')
     
@@ -14,7 +16,8 @@ def k_nearest_neighbors(data, predict, k = 3):
 
     for group in data:
         for features in data[group]:
-            euclidean_distance = np.linalg.norm(np.array(features) - np.array(predict))
+            euclidean_distance = find_distance(features, predict)
+            # np.linalg.norm(np.array(features) - np.array(predict))
             distances.append([euclidean_distance, group])
 
     votes = [i[1] for i in sorted(distances)[:k]]
@@ -23,19 +26,16 @@ def k_nearest_neighbors(data, predict, k = 3):
     
     return vote_result
 
-df = pd.read_csv('MachineLearning\\breast-cancer-wisconsin.data')
-df.replace('?', 99999, inplace = True)
-df.drop(['id'], 1, inplace = True)
+# Read in file
+df = pd.read_csv('MachineLearning\\ml14-data\\breast-cancer-wisconsin.data')
+df.replace('?', 99999, inplace=True)
+df.drop(['id'], axis=1, inplace=True)
 
-# print(df.head())
+# Convert to list and shuffle
 full_data = df.astype(float).values.tolist()
-# print(full_data[:10])
-# print(full_data[:5])
-
 random.shuffle(full_data)
-# print(20 * '#')
-# print(full_data[:5])
 
+# Create empty dictionaries
 test_size = 0.2
 train_set = {
     2:[],
@@ -46,25 +46,26 @@ test_set = {
     4:[]
     }
 
+# Split train and test data
 train_data = full_data[:-int(test_size * len(full_data))]
 test_data = full_data[-int(test_size * len(full_data)):]
 
+# Populate dictionaries
 for i in train_data:
     train_set[i[-1]].append(i[:-1])
 
 for i in test_data:
     test_set[i[-1]].append(i[:-1])
 
+# Find accuracy
 correct = 0
 total = 0
 
 for group in test_set:
     for data in test_set[group]:
-        vote = k_nearest_neighbors(train_set, data, k = 5)
+        vote = k_nearest_neighbors(train_set, data, k=5)
         if group == vote:
             correct += 1
         total += 1
 
 print('Accuracy =', correct / total)
-print(correct)
-print(total)
