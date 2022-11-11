@@ -1,7 +1,8 @@
 from math import sqrt
 
-plot1 = [1, 3]
-plot2 = [2, 5]
+q = [1, 3, 10]
+p = [2, 5, 13]
 
-euclidean_distance = sqrt((plot1[0] - plot2[0]) ** 2 + (plot1[1] - plot2[1]) ** 2)
-print(euclidean_distance)
+def find_distance(q, p):
+    n = len(q)
+    return sqrt(sum([(q[i] - p[i]) ** 2 for i in range(n)]))

@@ -1,16 +1,22 @@
+# Imports
+import random
 from statistics import mean
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import style
 
+# Setting up plot
 style.use('fivethirtyeight')
 
-xs = np.array([1, 2, 3, 4, 5, 6], dtype=np.float64)
-ys = np.array([5, 4, 6, 5, 6, 7], dtype=np.float64)
+# Example Data
+xs = np.array([random.random, random.random, random.random], dtype=np.float64)
+ys = np.array([random.random, random.random, random.random], dtype=np.float64)
 
+# Plotting Data w/o Line
 # plt.scatter(xs, ys)
 # plt.show()
 
+# Find the best fit line
 def best_fit_slope_and_intercept(xs, ys):
     m = (((mean(xs) * mean(ys)) - mean(xs * ys)) / 
     ((mean(xs) ** 2) - mean(xs ** 2)))
@@ -19,9 +25,11 @@ def best_fit_slope_and_intercept(xs, ys):
     
     return m, b
 
+# Find squared error
 def squared_error(ys_orig, ys_line):
     return sum((ys_line - ys_orig) ** 2)
 
+# R Squared
 def coeficent_of_determination(ys_orig, ys_line):
     y_mean_line = [mean(ys_orig) for y in ys_orig]
     
@@ -29,6 +37,7 @@ def coeficent_of_determination(ys_orig, ys_line):
     squared_error_mean = squared_error(ys_orig, y_mean_line)
 
     return 1 - (squared_error_regr / squared_error_mean)
+
 
 m, b = best_fit_slope_and_intercept(xs, ys)
 
