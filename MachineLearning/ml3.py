@@ -15,5 +15,7 @@ df.fillna(-99999, inplace=True)
 forcast_out = int(math.ceil(0.01 * len(df)))
 df['label'] = df[forcast_col].shift(-forcast_out)
 
+print(df[forcast_col], df["label"])
+
 df.dropna(inplace=True)
 print(df.head())
