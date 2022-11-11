@@ -19,7 +19,7 @@ df = df[['Adj. Close', 'HL_PCT', 'PCT_change', 'Adj. Volume']]
 forcast_col = 'Adj. Close'
 df.fillna(-999999, inplace=True)
 
-forcast_out = int(math.ceil(0.1 * len(df)))
+forcast_out = int(math.ceil(0.02 * len(df)))
 print(forcast_out)
 
 df['label'] = df[forcast_col].shift(-forcast_out)
@@ -35,13 +35,15 @@ y = np.array(df['label'])
 
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.1)
 
+## First Time Setup
 # clf = LinearRegression(n_jobs=-1)
 # clf.fit(X_train, y_train)
 
-# with open('MachineLearning/linearregression.pickle', 'wb') as f:
+# with open('MachineLearning/ml6-data/linearregression.pickle', 'wb') as f:
 #     pickle.dump(clf, f)
 
-pickle_in = open('MachineLearning/linearregression.pickle', 'rb')
+## Second time and onward
+pickle_in = open('MachineLearning/ml6-data/linearregression.pickle', 'rb')
 clf = pickle.load(pickle_in)
 
 accuracy = clf.score(X_test, y_test)
