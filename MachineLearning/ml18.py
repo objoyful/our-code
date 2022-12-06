@@ -28,7 +28,7 @@ def k_nearest_neighbors(data, predict, k=3):
 
 # Read in file
 df = pd.read_csv('MachineLearning\\ml14-data\\breast-cancer-wisconsin.data')
-df.replace('?', 99999, inplace=True)
+df.replace('?', -99999, inplace=True)
 df.drop(['id'], axis=1, inplace=True)
 
 # Convert to list and shuffle
@@ -61,11 +61,13 @@ for i in test_data:
 correct = 0
 total = 0
 
-for group in test_set:
+for group in test_set: #2, 4
     for data in test_set[group]:
         vote = k_nearest_neighbors(train_set, data, k=5)
         if group == vote:
             correct += 1
+        else:
+            print(data, group, vote)
         total += 1
 
 print('Accuracy =', correct / total)
