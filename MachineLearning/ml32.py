@@ -12,12 +12,13 @@
 # Nice tutorial:
 # https://courses.csail.mit.edu/6.867/wiki/images/a/a7/Qp-cvxopt.pdf
 
-
+# Imports
 import numpy as np
 from numpy import linalg
 import cvxopt
 import cvxopt.solvers
-             
+
+# Kernels            
 def linear_kernel(x1, x2):
     return np.dot(x1, x2)
 
@@ -27,8 +28,10 @@ def polynomial_kernel(x, y, p = 3):
 def gaussian_kernel(x, y, sigma = 5.0):
     return np.exp(-linalg.norm(x-y)**2 / (2 * (sigma ** 2)))
 
+# SVM Object
 class SVM(object):
 
+    # Initalization, C is defualt to None, hard margin
     def __init__(self, kernel = linear_kernel, C = None):
         self.kernel = kernel
         self.C = C
@@ -73,14 +76,14 @@ class SVM(object):
         self.sv_y = y[sv]
         print("%d support vectors out of %d points" % (len(self.a), n_samples))
 
-        # Intercept
+        # Intercept (b)
         self.b = 0
         for n in range(len(self.a)):
             self.b += self.sv_y[n]
             self.b -= np.sum(self.a * self.sv_y * K[ind[n], sv])
         self.b /= len(self.a)
 
-        # Weight vector
+        # Weight vector (w)
         if self.kernel == linear_kernel:
             self.w = np.zeros(n_features)
             for n in range(len(self.a)):
@@ -106,6 +109,7 @@ class SVM(object):
 if __name__ == "__main__":
     import pylab as pl
 
+    # Lineraly seperable data
     def gen_lin_separable_data():
         # generate training data in the 2-d case
         mean1 = np.array([0, 2])
@@ -117,6 +121,7 @@ if __name__ == "__main__":
         y2 = np.ones(len(X2)) * -1
         return X1, y1, X2, y2
 
+    # Non Lineraly seperable data
     def gen_non_lin_separable_data():
         mean1 = [-1, 2]
         mean2 = [1, -1]
@@ -131,6 +136,7 @@ if __name__ == "__main__":
         y2 = np.ones(len(X2)) * -1
         return X1, y1, X2, y2
 
+    # Lineraly seperable data (overlapping)
     def gen_lin_separable_overlap_data():
         # generate training data in the 2-d case
         mean1 = np.array([0, 2])
@@ -142,6 +148,7 @@ if __name__ == "__main__":
         y2 = np.ones(len(X2)) * -1
         return X1, y1, X2, y2
 
+    # Make training data
     def split_train(X1, y1, X2, y2):
         X1_train = X1[:90]
         y1_train = y1[:90]
@@ -151,6 +158,7 @@ if __name__ == "__main__":
         y_train = np.hstack((y1_train, y2_train))
         return X_train, y_train
 
+    # Make testing data
     def split_test(X1, y1, X2, y2):
         X1_test = X1[90:]
         y1_test = y1[90:]
@@ -160,6 +168,7 @@ if __name__ == "__main__":
         y_test = np.hstack((y1_test, y2_test))
         return X_test, y_test
 
+    # Plot
     def plot_margin(X1_train, X2_train, clf):
         def f(x, w, b, c = 0):
             # given x, return y such that [x, y] in on the line
@@ -247,5 +256,5 @@ if __name__ == "__main__":
 
         
     # test_linear()
-    test_non_linear()
+    #test_non_linear()
     test_soft()
