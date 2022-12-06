@@ -28,6 +28,8 @@ class Support_Vector_Machine:
     # train
     def fit(self, data):
         pass
+        # self.w =
+        # self.b =
 
     def predict(self, features):
         # sign(x.w + b)
