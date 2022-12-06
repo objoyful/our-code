@@ -57,7 +57,7 @@ class Support_Vector_Machine:
         step_sizes = [self.max_feature_value * 0.1,
                       self.max_feature_value * 0.01,
                       # Point of Expense:
-                      self.max_feature_value * 0.001
+                      self.max_feature_value * 0.0001
                       ]
         
         # We can take larger steps with b
@@ -65,7 +65,7 @@ class Support_Vector_Machine:
         b_multiple = 2
 
         # Our best value for w, start with max value * 10
-        latest_optimum = self.max_feature_value * 10
+        latest_optimum = self.max_feature_value * 2
 
         for step in step_sizes:
             # Set w to our best values
