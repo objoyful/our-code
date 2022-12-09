@@ -66,7 +66,15 @@ pipwin install gdal
 pipwin install fiona
 
 Install Pip: python3 get-pip.py
-PIP: pip numpy scipy matplotlib ipython scikit-learn scikit-image pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl pygame lxml MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock h5py keras_preprocessing keras_applications gast "futures<3" protobuf pybind11 qtpy pyopengl pyyaml cmake pyttsx3 gTTS quandl kaggle pydicom tqdm gym[all] cython xgboost google-cloud-bigquery geopandas eli5 pipwin wxPython
+PIP: pip numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock keras_preprocessing keras_applications gast "futures<3" protobuf pybind11 qtpy pyopengl pyyaml cmake pyttsx3 gTTS quandl kaggle pydicom tqdm cython xgboost google-cloud-bigquery geopandas eli5 pipwin libsvm
+
+3.11: "lxml<4.9.1"
+<3.11: pygame wxPython scikit-image lxml h5py cvxopt gym[all]
+
+Wheel needed for 3.11: pygame scikit-image h5py
+https://www.lfd.uci.edu/~gohlke/pythonlibs/
+
+No 3.11: wxPython cvxopt gym[all]
 
 PIP CUDA: face_recognition
 PIP Desktop: tensorflow tensorflow_datasets tflearn
