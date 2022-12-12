@@ -29,7 +29,7 @@ home.dest Home/Destination
 '''
 
 # Read Data
-df = pd.read_excel('MachineLearning\\titanic.xls')
+df = pd.read_excel('MachineLearning\\ml35-data\\titanic.xls')
 # print(df.head())
 
 # Drop unnecessary columns, convert to numeric values, and fill missing values
