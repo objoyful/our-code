@@ -34,8 +34,8 @@ df = pd.read_excel('MachineLearning\\ml35-data\\titanic.xls')
 
 # Drop unnecessary columns, convert to numeric values, and fill missing values
 df.drop(['body', 'name'], axis=1, inplace=True)
-df = df.apply(pd.to_numeric, errors='ignore', axis=1) # df.convert_objects(convert_numeric = True)
-df.fillna(0, inplace = True)
+df = df.apply(pd.to_numeric, errors='ignore', axis=1) # df.convert_objects(convert_numeric=True)
+df.fillna(0, inplace=True)
 print(df.head())
 
 # Convert objects to ints
@@ -51,7 +51,7 @@ def handle_non_numerical_data(df):
             return text_digit_vals[val]
         
         # Only run on columns that aren't int or float
-        if df[column].dtype != np.int64 and df[column].dtype !=  np.float64:
+        if df[column].dtype != np.int64 and df[column].dtype != np.float64:
             column_contents = df[column].values.tolist()
             
             # Get unique elements from column
@@ -59,7 +59,7 @@ def handle_non_numerical_data(df):
             
             # Start x counter
             x = 0
-            for unique in unique_elements:
+            for unique in enumerate(unique_elements):
                 # If we haven't added that value to text_digit_vals, then add it
                 if unique not in text_digit_vals:
                     # Assign that key to x, and then increase x
