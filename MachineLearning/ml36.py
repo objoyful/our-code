@@ -29,13 +29,11 @@ home.dest Home/Destination
 
 # Read Data
 df = pd.read_excel('MachineLearning\\ml35-data\\titanic.xls')
-# print(df.head())
 
 # Drop unnecessary columns, convert to numeric values, and fill missing values
 df.drop(['body', 'name'], axis=1, inplace=True)
 df = df.apply(pd.to_numeric, errors='ignore', axis=1) # df.convert_objects(convert_numeric = True)
 df.fillna(0, inplace = True)
-print(df.head())
 
 # Convert objects to ints
 def handle_non_numerical_data(df):
@@ -71,8 +69,6 @@ def handle_non_numerical_data(df):
 
 df = handle_non_numerical_data(df)
 # print(df.head())
-
-# df.drop(['ticket'], axis=1, inplace=True)
 
 # Define features and labels
 X = np.array(df.drop(['survived'], axis=1).astype(float))
