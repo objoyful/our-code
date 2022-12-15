@@ -5,21 +5,8 @@ style.use('ggplot')
 
 # Imports
 import numpy as np
-
-# Sample Data
-X = np.array([[1, 2],
-              [1.5, 1.8],
-              [5, 8],
-              [8, 8],
-              [1, 0.6],
-              [9, 11]])
-
-# Plot Sample Data
-plt.scatter(X[:,0], X[:,1], s = 150)
-plt.show()
-
-# List of different colors
-colors = 10 * ["g", "r", "c", "b", "k"]
+import pandas as pd
+from sklearn import preprocessing
 
 # KMeans algorithm
 class K_Means:
@@ -87,39 +74,66 @@ class K_Means:
 
         return classification
 
+# Read Data
+df = pd.read_excel('MachineLearning\\ml35-data\\titanic.xls')
+
+# Drop unnecessary columns, convert to numeric values, and fill missing values
+df.drop(['body', 'name'], axis=1, inplace=True)
+df = df.apply(pd.to_numeric, errors='ignore', axis=1) # df.convert_objects(convert_numeric = True)
+df.fillna(0, inplace = True)
+
+# Convert objects to ints
+def handle_non_numerical_data(df):
+    # List of columns
+    columns = df.columns.values
+
+    for column in columns:
+        text_digit_vals = {} # {"Female": 0, "Male": 1}
+        
+        # From Female get 0, from Male get 1, will apply this to data
+        def convert_to_int(val):
+            return text_digit_vals[val]
+        
+        # Only run on columns that aren't int or float
+        if df[column].dtype != np.int64 and df[column].dtype !=  np.float64:
+            column_contents = df[column].values.tolist()
+            
+            # Get unique elements from column
+            unique_elements = set(column_contents)
+            
+            # Start x counter
+            x = 0
+            for unique in unique_elements:
+                # If we haven't added that value to text_digit_vals, then add it
+                if unique not in text_digit_vals:
+                    # Assign that key to x, and then increase x
+                    text_digit_vals[unique] = x
+                    x += 1
+            
+            # Apply our dictionary to our data
+            df[column] = list(map(convert_to_int, df[column]))
+    return df
+
+df = handle_non_numerical_data(df)
+# print(df.head())
+
+# Define features and labels
+X = np.array(df.drop(['survived'], axis=1).astype(float))
+X = preprocessing.scale(X)
+y = np.array(df['survived'])
+
 # Fit model
 clf = K_Means()
 clf.fit(X)
 
-# Plot centroid
-for centroid in clf.centroids:
-    # Make a point on graph for each centroid
-    plt.scatter(clf.centroids[centroid][0], clf.centroids[centroid][1], marker='o', color='k', s=150, linewidths=5)
+# Find accuracy
+correct = 0
+for i in range(len(X)):
+    predict_me = np.array(X[i].astype(float))
+    predict_me = predict_me.reshape(-1, len(predict_me))
+    prediction = clf.predict(predict_me)
 
-# Plot every point
-# Loop through every class
-for classification in clf.classifications:
-    # Set color for that class
-    color = colors[classification]
-    
-    # Loop through evey point in that class
-    for featureset in clf.classifications[classification]:
-        # Plot that point
-        plt.scatter(featureset[0], featureset[1], marker='x', color=color, s=150, linewidths=5)
+    if prediction == y[i]:
+        correct += 1
 
-# Test predictions with unkown sample data
-unkowns = np.array([[1, 3],
-                   [8, 9],
-                   [0, 3],
-                   [5, 4],
-                   [6, 4]])
-
-# Loop thorugh every unkown point
-for unknown in unkowns:
-    # Classify each point
-    classification = clf.predict(unknown)
-    
-    # Plot points
-    plt.scatter(unknown[0], unknown[1], marker='*', color=colors[classification], s=150, linewidths=5)
-
-plt.show()
+print(correct / len(X))
