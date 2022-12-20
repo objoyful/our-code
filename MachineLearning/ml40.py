@@ -86,9 +86,6 @@ clf.fit(X)
 labels = clf.labels_
 cluster_centers = clf.cluster_centers_
 
-# Define cluster group columns
-original_df['cluster_group'] = np.nan
-
 # Fill in cluster group column with what that row's cluster is
 original_df['cluster_group'] = labels
 
