@@ -1,7 +1,7 @@
 # Matplotlib Setup
 import matplotlib.pyplot as plt
 from matplotlib import style
-from numpy.lib.arraysetops import unique
+
 style.use('ggplot')
 
 # Imports
