@@ -19,7 +19,7 @@ X = np.array([[1, 2],
               [9, 3],])
 
 # Plot Sample Data
-# plt.scatter(X[:, 0], X[:, 1], s = 150)
+# plt.scatter(X[:, 0], X[:, 1], s=150)
 # plt.show()
 
 # Colors List
@@ -28,24 +28,32 @@ colors = 10 * ["g", "r", "c", "b", "k"]
 # Mean Shift algorithm
 class MeanShift:
     # Initialization
-    def __init__(self, radius=4):
+    def __init__(self, radius=1):
         self.radius = radius
 
     def fit(self, data):
         # Our centroids, at first every point is a centroid
-        centroids = {}
+        centroids = {} #{0: [x0, y0], 1:[x1, y1]}
 
         # Set every point as a centroid
         for i in range(len(data)):
             centroids[i] = data[i]
         
         while True:
+            
+            plt.scatter(X[:, 0], X[:, 1], s=150)
+            for c in centroids:
+                plt.scatter(centroids[c][0], centroids[c][1], color='k', s=150, marker='*')
+
+            plt.show()
+
+            
             # Our new centroids will be saved here
             new_centroids = []
             
             for i in centroids:
                 # All the points that are within our bandwidth
-                in_bandwidth = []
+                in_bandwidth = [] # [[x0, y0], [x1, y1]]
                 centroid = centroids[i]
 
                 for featureset in data:
