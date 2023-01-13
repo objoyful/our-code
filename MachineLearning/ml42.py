@@ -1,22 +1,30 @@
 # Matplotlib Setup
 import matplotlib.pyplot as plt
 from matplotlib import style
-from numpy.lib.arraysetops import unique
+from sklearn.datasets._samples_generator import make_blobs
+import random
+
 style.use('ggplot')
 
 # Imports
 import numpy as np
 
 # Sample Data
-X = np.array([[1, 2],
-              [1.5, 1.8],
-              [5, 8],
-              [8, 8],
-              [1, 0.6],
-              [9, 11],
-              [8, 2],
-              [10, 2],
-              [9, 3],])
+
+# Choose a random amount of centers from 2 to 8
+centers = random.randrange(2, 8)
+print(centers)
+X, y = make_blobs(n_samples=50, centers=centers, n_features=2)
+
+# X = np.array([[1, 2],
+#               [1.5, 1.8],
+#               [5, 8],
+#               [8, 8],
+#               [1, 0.6],
+#               [9, 11],
+#               [8, 2],
+#               [10, 2],
+#               [9, 3],])
 
 # Plot Sample Data
 # plt.scatter(X[:, 0], X[:, 1], s=150)
@@ -63,8 +71,8 @@ class MeanShift:
                     # Find distance
                     distance = np.linalg.norm(featureset - centroid)
                     
-                    if distance == 0:
-                        distance = 0.000000000001
+                    # if distance == 0:
+                    #     distance = 0.000000000001
                     
                     # How far away the point is will determine the index of the "weights" list, and thus how how are weight. The further away, the higher the index, the lower the weight. If the index is out of range, set it the the highest amount
                     weight_index = int(distance / self.radius)
@@ -88,6 +96,8 @@ class MeanShift:
 
             # Loop through every centroid
             for i in uniques:
+                # if i in to_pop:
+                #     pass
                 # Loop through every other centroid
                 for ii in uniques:
                     # If the two centroids are within a radius from each other, add them to to_pop list
@@ -103,7 +113,6 @@ class MeanShift:
                     uniques.remove(i)
                 except:
                     pass
-
             # Save previous centroids and cler centroids variable
             prev_centroids = dict(centroids)
             centroids = {}
@@ -161,7 +170,14 @@ clf.fit(X)
 # Define centroids
 centroids = clf.centroids
 
-
+# Plot each point
+for classification in clf.classifications:
+    # Set the color based on what class it's in
+    color = colors[classification]
+    
+    # Plot each point
+    for featureset in clf.classifications[classification]:
+        plt.scatter(featureset[0], featureset[1], marker='x', color=color, s=150, linewidths=5)
 
 # Plot centroids
 for c in centroids:
