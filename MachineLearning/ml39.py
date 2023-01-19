@@ -8,7 +8,7 @@ style.use("ggplot")
 
 centers = [[1, 1, 1], [5, 5, 5], [3, 10, 10]]
 
-X, _ = make_blobs(n_samples=100000, centers=centers, cluster_std=1)
+X, _ = make_blobs(n_samples=1000, centers=centers, cluster_std=1)
 
 ms = MeanShift(n_jobs=-1)
 ms.fit(X)

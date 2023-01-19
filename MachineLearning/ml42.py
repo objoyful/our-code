@@ -1,20 +1,20 @@
 # Matplotlib Setup
 import matplotlib.pyplot as plt
 from matplotlib import style
-from sklearn.datasets._samples_generator import make_blobs
-import random
 
 style.use('ggplot')
 
 # Imports
 import numpy as np
+from sklearn.datasets._samples_generator import make_blobs
+import random
 
 # Sample Data
 
 # Choose a random amount of centers from 2 to 8
 centers = random.randrange(2, 8)
 print(centers)
-X, y = make_blobs(n_samples=50, centers=centers, n_features=2)
+X, y = make_blobs(n_samples=50, centers=centers, n_features=2, cluster_std=1)
 
 # X = np.array([[1, 2],
 #               [1.5, 1.8],
@@ -36,14 +36,14 @@ colors = 10 * ["g", "r", "c", "b", "k"]
 # Mean Shift algorithm
 class MeanShift:
     # Initialization
-    def __init__(self, radius=None, radius_norm_step=100):
+    def __init__(self, radius=None, radius_norm_step=10):
         self.radius = radius
         self.radius_norm_step = radius_norm_step
 
     def fit(self, data):
         if self.radius == None:
             # Find the average position of all of our data
-            all_data_centroid = np.average(data, axis=0)
+            all_data_centroid = np.average(abs(data), axis=0)
             all_data_norm = np.linalg.norm(all_data_centroid)
             
             # Set the radius as avg position / step
@@ -80,7 +80,7 @@ class MeanShift:
                         weight_index = self.radius_norm_step - 1
                     
                     # Getting the weight and squaring it. Repeating feature that many times, then adding it to in_bandwidth
-                    to_add = (weights[weight_index] ** 2) * [featureset]
+                    to_add = (weights[weight_index] ** 4) * [featureset]
                     in_bandwidth += to_add
                     
 
@@ -95,24 +95,22 @@ class MeanShift:
             to_pop = []
 
             # Loop through every centroid
-            for i in uniques:
-                # if i in to_pop:
-                #     pass
+            for i in uniques: # (1, 2, 3)
+                if i in to_pop:
+                    pass
                 # Loop through every other centroid
-                for ii in uniques:
+                for ii in uniques:# (1, 2, 3)
                     # If the two centroids are within a radius from each other, add them to to_pop list
                     if i == ii:
                         pass
-                    elif np.linalg.norm(np.array(i) - np.array(ii)) <= self.radius:
+                    elif np.linalg.norm(np.array(i) - np.array(ii)) <= 0.5 * self.radius and ii not in to_pop:
                         to_pop.append(ii)
                         break
   
             # Remove centroids from uniques
             for i in to_pop:
-                try:
-                    uniques.remove(i)
-                except:
-                    pass
+                uniques.remove(i)
+            
             # Save previous centroids and cler centroids variable
             prev_centroids = dict(centroids)
             centroids = {}

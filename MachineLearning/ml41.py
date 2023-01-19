@@ -28,12 +28,12 @@ colors = 10 * ["g", "r", "c", "b", "k"]
 # Mean Shift algorithm
 class MeanShift:
     # Initialization
-    def __init__(self, radius=1):
+    def __init__(self, radius=8):
         self.radius = radius
 
     def fit(self, data):
         # Our centroids, at first every point is a centroid
-        centroids = {} #{0: [x0, y0], 1:[x1, y1]}
+        centroids = {} # {0: [x0, y0], 1:[x1, y1]}
 
         # Set every point as a centroid
         for i in range(len(data)):
