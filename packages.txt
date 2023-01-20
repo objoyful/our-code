@@ -10,6 +10,7 @@
 
 [LINUX] Perms:
 sudo usermod -a -G dialout $USER
+sudo groupadd -f -r i2c
 sudo usermod -aG i2c $USER
 sudo groupadd -f -r gpio
 sudo usermod -a -G gpio $USER
