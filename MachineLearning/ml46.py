@@ -1,4 +1,5 @@
 import tensorflow._api.v2.compat.v1 as tf
+tf.disable_eager_execution()
 import tensorflow_datasets
 # from tensorflow.examples.tutorials.mnist import input_data
 
@@ -13,7 +14,7 @@ n_classes = 10
 batch_size = 100
 
 # height x width
-tf.disable_eager_execution()
+
 x = tf.placeholder('float', [None, 784])
 y = tf.placeholder('float')
 
