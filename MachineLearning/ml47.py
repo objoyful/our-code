@@ -1,9 +1,10 @@
 import tensorflow._api.v2.compat.v1 as tf
-import tensorflow.keras.datasets.mnist as mn
+from tensorflow.keras.datasets import mnist
+# import tensorflow as tf
 # from tensorflow.examples.tutorials.mnist import input_data
 
-# minst = input_data.read_data_sets('\\temp\data\\', one_hot = True)
-mnist = mn.load_data()
+mnist = mnist.load_data() #(x_train, y_train), (x_test, y_test)
+
 
 n_nodes_hl1 = 500
 n_nodes_hl2 = 500
@@ -47,7 +48,7 @@ def neural_network_model(data):
 
 def train_neural_network(x):
     prediction = neural_network_model(x)
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = prediction, labels = y))
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
     
     hm_epochs = 10
