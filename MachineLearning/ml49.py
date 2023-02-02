@@ -20,7 +20,7 @@ def create_lexicon(pos, neg):
                 lexicon += list(all_words)
     
     lexicon = [lemmatizer.lemmatize(i) for i in lexicon]
-    w_counts = Counter(lexicon)
+    w_counts = Counter(lexicon) # {'the': 52521, 'and':25242}
 
     l2 = []
     for w in w_counts:
@@ -35,7 +35,7 @@ def sample_handling(sample, lexicon, classification):
     
     '''
     [
-    [[]]
+    [[0 1 0 0 1 0], [0 1]]
     ]
     '''
 
