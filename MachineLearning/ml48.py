@@ -1,7 +1,7 @@
 # Imports
 import nltk
 from nltk.tokenize import word_tokenize # [i, pulled, the, chair]
-from nltk.stem import WordNetLemmatizer # [ran, running, run]
+from nltk.stem import WordNetLemmatizer # [ran, running, runs, run]
 import numpy as np
 import random
 import pickle
