@@ -1,10 +1,17 @@
 import tensorflow._api.v2.compat.v1 as tf
 from tensorflow.keras.datasets import mnist
+import numpy as np
+import pandas as pd
 # import tensorflow as tf
 # from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = mnist.load_data() #(x_train, y_train), (x_test, y_test)
+(x_train, y_train), (x_test, y_test) = mnist.load_data() #(x_train, y_train), (x_test, y_test)
 
+x_train = x_train.flatten().reshape(len(x_train), 784)
+x_test = x_test.flatten().reshape(len(x_test), 784)
+y_train = pd.get_dummies(y_train)
+y_test = pd.get_dummies(y_train)
+print(y_train)
 
 n_nodes_hl1 = 500
 n_nodes_hl2 = 500
@@ -59,8 +66,9 @@ def train_neural_network(x):
         for epoch in range(hm_epochs):
             epoch_loss = 0
             
-            for _ in range(int(mnist.train.num_examples / batch_size)):
-                epoch_x, epoch_y = mnist.train.next_batch(batch_size)
+            for _ in range(int(len(x_train) / batch_size)):
+                rand_nums = np.random.choice(x_train.shape[0], batch_size, replace=False)
+                epoch_x, epoch_y = (x_train[rand_nums, :], y_train[rand_nums, :])
                 _, c = sess.run([optimizer, cost], feed_dict = {x: epoch_x, y: epoch_y})
             
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
@@ -68,6 +76,6 @@ def train_neural_network(x):
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
 
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
-        print('Accuracy:', accuracy.eval({x: mnist.test.images, y: mnist.test.labels}))
+        print('Accuracy:', accuracy.eval({x: x_test, y: y_test}))
 
 train_neural_network(x)
