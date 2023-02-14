@@ -12,7 +12,7 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 batch_size = 32
-total_batches = int(1600000 / batch_size)
+total_batches = int(100000 / batch_size)
 hm_epochs = 10
 
 tf.disable_eager_execution()
@@ -20,7 +20,7 @@ x = tf.placeholder('float')
 y = tf.placeholder('float')
 
 hidden_1_layer = {
-                  'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])),
+                  'weight': tf.Variable(tf.random_normal([2544, n_nodes_hl1])),
                   'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
 
 hidden_2_layer = {
@@ -74,6 +74,9 @@ def train_neural_network(x):
                 batches_run = 0
                 
                 for line in f:
+                    if batches_run == total_batches:
+                        break
+                    
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
                     
@@ -105,9 +108,9 @@ def train_neural_network(x):
                         batch_y = []
                         
                         batches_run +=1
-                        print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
+                        # print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
 
-            saver.save(sess, "model.ckpt")
+            saver.save(sess, "MachineLearning/ml51-data/model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
             
             with open(tf_log, 'a') as f:

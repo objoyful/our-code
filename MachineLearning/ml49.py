@@ -1,10 +1,11 @@
+# Imports
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import numpy as np
 import random
 import pickle
-from collections import Counter
+from collections import Counter # {"the": 100}
 
 lemmatizer = WordNetLemmatizer()
 hm_lines = 10000
@@ -24,10 +25,9 @@ def create_lexicon(pos, neg):
 
     l2 = []
     for w in w_counts:
-        if 1000 > w_counts[w] > 50:
+        if 5000 > w_counts[w] > 10:
             l2.append(w)
 
-    print(len(l2))
     return l2
 
 def sample_handling(sample, lexicon, classification):
@@ -35,6 +35,8 @@ def sample_handling(sample, lexicon, classification):
     
     '''
     [
+    [[0 1 0 0 1 0], [0 1]],
+    [[0 1 0 0 1 0], [0 1]],
     [[0 1 0 0 1 0], [0 1]]
     ]
     '''
@@ -57,7 +59,7 @@ def sample_handling(sample, lexicon, classification):
     
     return featureset
 
-def create_feature_sets_and_labels(pos, neg, test_size = 0.1):
+def create_feature_sets_and_labels(pos, neg, test_size=0.1):
     lexicon = create_lexicon(pos, neg)
 
     features = []
@@ -72,11 +74,11 @@ def create_feature_sets_and_labels(pos, neg, test_size = 0.1):
     features = np.array(features)
     testing_size = int(test_size * len(features))
 
-    train_x = list(features[:,0][:-testing_size])
-    train_y = list(features[:,1][:-testing_size])
+    train_x = list(features[:, 0][:-testing_size]) #[[x, y], [x, y], [x, y]...]
+    train_y = list(features[:, 1][:-testing_size])
 
-    test_x = list(features[:,0][-testing_size:])
-    test_y = list(features[:,1][-testing_size:])
+    test_x = list(features[:, 0][-testing_size:])
+    test_y = list(features[:, 1][-testing_size:])
 
     return train_x, train_y, test_x, test_y
 
