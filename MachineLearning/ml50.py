@@ -2,7 +2,7 @@ import tensorflow._api.v2.compat.v1 as tf
 from ml49 import create_feature_sets_and_labels
 import numpy as np
 
-train_x, train_y, test_x, test_y = create_feature_sets_and_labels('MachineLearning\\pos.txt', 'MachineLearning\\neg.txt')
+train_x, train_y, test_x, test_y = create_feature_sets_and_labels('MachineLearning/pos.txt', 'MachineLearning/neg.txt')
 
 n_nodes_hl1 = 500
 n_nodes_hl2 = 500
