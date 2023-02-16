@@ -12,7 +12,7 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 batch_size = 32
-total_batches = int(1600000 / batch_size)
+total_batches = int(1594576 / batch_size)
 hm_epochs = 10
 
 tf.disable_eager_execution()
@@ -20,7 +20,7 @@ x = tf.placeholder('float')
 y = tf.placeholder('float')
 
 hidden_1_layer = {
-                  'weight': tf.Variable(tf.random_normal([2638, n_nodes_hl1])),
+                  'weight': tf.Variable(tf.random_normal([2544, n_nodes_hl1])),
                   'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
 
 hidden_2_layer = {
@@ -43,7 +43,7 @@ def neural_network_model(data):
     return output
 
 saver = tf.train.Saver()
-tf_log = 'MachineLearning\\ml51-data\\tf.log'
+tf_log = 'MachineLearning/ml51-data/tf.log'
 
 def train_neural_network(x):
     prediction = neural_network_model(x)
@@ -61,19 +61,21 @@ def train_neural_network(x):
 
         while epoch <= hm_epochs:
             if epoch != 1:
-                saver.restore(sess, "MachineLearning\\ml51-data\\model.ckpt")
+                saver.restore(sess, "MachineLearning/ml51-data/model.ckpt")
             
             epoch_loss = 1
             
-            with open('MachineLearning\\ml51-data\\lexicon-2500-2638.pickle', 'rb') as f:
+            with open('MachineLearning/ml51-data/lexicon-2500-2544.pickle', 'rb') as f:
                 lexicon = pickle.load(f)
             
-            with open('MachineLearning\\ml51-data\\train_set_shuffled.csv', buffering = 20000, encoding = 'latin-1') as f:
+            with open('MachineLearning/ml51-data/train_set_shuffled.csv', buffering = 20000, encoding = 'latin-1') as f:
                 batch_x = []
                 batch_y = []
                 batches_run = 0
                 
                 for line in f:
+                    if batches_run == total_batches:
+                        break
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
                     
@@ -105,9 +107,9 @@ def train_neural_network(x):
                         batch_y = []
                         
                         batches_run +=1
-                        print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
+                        # print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
 
-            saver.save(sess, "model.ckpt")
+            saver.save(sess, "MachineLearning/ml51-data/model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
             
             with open(tf_log, 'a') as f:
@@ -125,7 +127,7 @@ def test_neural_network():
         
         for epoch in range(hm_epochs):
             try:
-                saver.restore(sess, "MachineLearning\\ml51-data\\model.ckpt")
+                saver.restore(sess, "MachineLearning/ml51-data/model.ckpt")
             except Exception as e:
                 print(str(e))
             
@@ -139,7 +141,7 @@ def test_neural_network():
         
         counter = 0
         
-        with open('MachineLearning\\ml51-data\\processed-test-set.csv', buffering = 20000) as f:
+        with open('MachineLearning/ml51-data/processed-test-set.csv', buffering = 20000) as f:
             for line in f:
                 try:
                     features = list(eval(line.split('::')[0]))
