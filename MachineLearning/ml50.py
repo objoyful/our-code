@@ -1,4 +1,5 @@
 import tensorflow._api.v2.compat.v1 as tf
+tf.disable_eager_execution()
 from ml49 import create_feature_sets_and_labels
 import numpy as np
 
@@ -12,7 +13,6 @@ n_classes = 2
 batch_size = 100
 
 # height x width
-tf.disable_eager_execution()
 x = tf.placeholder('float', [None, len(train_x[0])])
 y = tf.placeholder('float')
 
@@ -29,7 +29,7 @@ def neural_network_model(data):
     output_layer = {'weights':tf.Variable(tf.random_normal([n_nodes_hl3, n_classes])),
                     'biases':tf.Variable(tf.random_normal([n_classes]))}
     
-    # (input_data * weights) + biases
+    # (input_data * weights) + (inputdata2 * weights2) + biases
 
     l1 = tf.add(tf.matmul(data, hidden_1_layer['weights']), hidden_1_layer['biases'])
     l1 = tf.nn.relu(l1)
@@ -42,11 +42,11 @@ def neural_network_model(data):
 
     output = tf.matmul(l3, output_layer['weights']) + output_layer['biases']
 
-    return output
+    return output # [1 0] [0 1]
 
 def train_neural_network(x):
     prediction = neural_network_model(x)
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = prediction, labels = y))
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
     
     hm_epochs = 10
@@ -62,10 +62,10 @@ def train_neural_network(x):
                 start = i
                 end = i + batch_size
 
-                batch_x = np.array(train_x[start: end])
-                batch_y = np.array(train_y[start: end])
+                batch_x = np.array(train_x[start:end])
+                batch_y = np.array(train_y[start:end])
 
-                _, c = sess.run([optimizer, cost], feed_dict = {x: batch_x, y: batch_y})
+                _, c = sess.run([optimizer, cost], feed_dict={x: batch_x, y: batch_y})
                 epoch_loss += c
 
                 i += batch_size

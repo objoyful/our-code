@@ -4,7 +4,8 @@ import tensorflow_datasets
 # from tensorflow.examples.tutorials.mnist import input_data
 
 # minst = input_data.read_data_sets('\\temp\data\\', one_hot = True)
-mnist = tensorflow_datasets.load('mnist')
+(x_train, y_train), (x_test, y_test) = tensorflow_datasets.load('mnist')
+
 
 n_nodes_hl1 = 500
 n_nodes_hl2 = 500
