@@ -3,11 +3,12 @@ from tensorflow.python.ops import rnn_cell, rnn
 import pandas as pd
 import numpy as np
 # from tensorflow.examples.tutorials.mnist import input_data
+tf.disable_eager_execution()
 
 # minst = input_data.read_data_sets('\\temp\data\\', one_hot = True)
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data() #(x_train, y_train), (x_test, y_test)
 
-x_train = x_train.flatten().reshape(len(x_train), 784)
+x_train = x_train.flatten().reshape(len(x_train), 784) 
 x_test = x_test.flatten().reshape(len(x_test), 784)
 
 y_train = pd.get_dummies(y_train).to_numpy()
@@ -15,14 +16,13 @@ y_test = pd.get_dummies(y_test).to_numpy()
 
 hm_epochs = 10
 n_classes = 10
-batch_size = 100
+batch_size = 128
 
 chunk_size = 28
 n_chunks = 28
-rnn_size = 256
+rnn_size = 128
 
 # height x width
-tf.disable_eager_execution()
 x = tf.placeholder('float', [None, n_chunks, chunk_size])
 y = tf.placeholder('float')
 
