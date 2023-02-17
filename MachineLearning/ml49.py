@@ -71,7 +71,7 @@ def create_feature_sets_and_labels(pos, neg, test_size=0.1):
     # does tf.armax([output]) == tf.argmax([expectations])    
     # tf.armax([52412, 23431]) == tf.argmax([1, 0])
 
-    features = np.array(features)
+    features = np.array(features, dtype=object)
     testing_size = int(test_size * len(features))
 
     train_x = list(features[:, 0][:-testing_size]) #[[x, y], [x, y], [x, y]...]
