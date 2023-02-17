@@ -1,17 +1,17 @@
 import tensorflow._api.v2.compat.v1 as tf
-from tensorflow.keras.datasets import mnist
 import numpy as np
 import pandas as pd
 # import tensorflow as tf
 # from tensorflow.examples.tutorials.mnist import input_data
+tf.disable_eager_execution()
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data() #(x_train, y_train), (x_test, y_test)
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data() #(x_train, y_train), (x_test, y_test)
 
 x_train = x_train.flatten().reshape(len(x_train), 784)
 x_test = x_test.flatten().reshape(len(x_test), 784)
-y_train = pd.get_dummies(y_train)
-y_test = pd.get_dummies(y_train)
-print(y_train)
+
+y_train = pd.get_dummies(y_train).to_numpy()
+y_test = pd.get_dummies(y_test).to_numpy()
 
 n_nodes_hl1 = 500
 n_nodes_hl2 = 500
@@ -21,7 +21,6 @@ n_classes = 10
 batch_size = 100
 
 # height x width
-tf.disable_eager_execution()
 x = tf.placeholder('float', [None, 784])
 y = tf.placeholder('float')
 
@@ -61,17 +60,25 @@ def train_neural_network(x):
     hm_epochs = 10
     
     with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
+        sess.run(tf.global_variables_initializer())
         
         for epoch in range(hm_epochs):
             epoch_loss = 0
             
-            for _ in range(int(len(x_train) / batch_size)):
-                rand_nums = np.random.choice(x_train.shape[0], batch_size, replace=False)
-                epoch_x, epoch_y = (x_train[rand_nums, :], y_train[rand_nums, :])
-                _, c = sess.run([optimizer, cost], feed_dict = {x: epoch_x, y: epoch_y})
+            i = 0
+            while i < len(x_train):
+                start = i
+                end = i + batch_size
+
+                batch_x = np.array(x_train[start:end])
+                batch_y = np.array(y_train[start:end])
+
+                _, c = sess.run([optimizer, cost], feed_dict={x: batch_x, y: batch_y})
+                epoch_loss += c
+
+                i += batch_size
             
-            print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
+            print('Epoch', epoch + 1, 'completed out of', hm_epochs, 'loss:', epoch_loss)
 
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
 

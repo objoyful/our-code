@@ -12,7 +12,7 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 batch_size = 32
-total_batches = int(1594576 / batch_size)
+total_batches = int(160000 / batch_size)
 hm_epochs = 10
 
 tf.disable_eager_execution()
@@ -20,7 +20,7 @@ x = tf.placeholder('float')
 y = tf.placeholder('float')
 
 hidden_1_layer = {
-                  'weight': tf.Variable(tf.random_normal([2544, n_nodes_hl1])),
+                  'weight': tf.Variable(tf.random_normal([2610, n_nodes_hl1])),
                   'bias': tf.Variable(tf.random_normal([n_nodes_hl1]))}
 
 hidden_2_layer = {
@@ -107,7 +107,7 @@ def train_neural_network(x):
                         batch_y = []
                         
                         batches_run +=1
-                        # print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
+                        print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
 
             saver.save(sess, "MachineLearning/ml51-data/model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
