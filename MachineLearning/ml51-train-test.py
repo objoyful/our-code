@@ -13,7 +13,7 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 batch_size = 32
-total_batches = int(1000 / batch_size)
+total_batches = int(100000 / batch_size)
 hm_epochs = 10
 
 x = tf.placeholder('float')
