@@ -9,6 +9,8 @@ n_nodes_hl1 = 500
 n_nodes_hl2 = 500
 n_nodes_hl3 = 500
 
+hm_epochs = 20
+
 n_classes = 2
 batch_size = 100
 
@@ -48,8 +50,6 @@ def train_neural_network(x):
     prediction = neural_network_model(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
-    
-    hm_epochs = 10
     
     with tf.Session() as sess:
         sess.run(tf.initialize_all_variables())

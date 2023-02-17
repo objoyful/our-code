@@ -16,27 +16,28 @@ user
 tweet
 '''
 
-def init_process(fin,fout):
-	outfile = open(fout,'a')
+def init_process(fin, fout):
+	outfile = open(fout, 'a')
 	with open(fin, buffering=200000, encoding='latin-1') as f:
 		for line in f:
 			try:
-				line = line.replace('"','')
+				line = line.replace('"', '')
 				initial_polarity = line.split(',')[0]
+				
 				if initial_polarity == '0':
-					initial_polarity = [1,0]
+					initial_polarity = [1, 0]
 				elif initial_polarity == '4':
-					initial_polarity = [0,1]
+					initial_polarity = [0, 1]
 
 				tweet = line.split(',')[-1]
-				outline = str(initial_polarity)+':::'+tweet
+				outline = str(initial_polarity) + ':::' + tweet
 				outfile.write(outline)
 			except Exception as e:
 				print(str(e))
 	outfile.close()
 
-init_process('MachineLearning/ml51-data/training.1600000.processed.noemoticon.csv','MachineLearning/ml51-data/train_set.csv')
-init_process('MachineLearning/ml51-data/testdata.manual.2009.06.14.csv','MachineLearning/ml51-data/test_set.csv')
+init_process('MachineLearning/ml51-data/training.1600000.processed.noemoticon.csv', 'MachineLearning/ml51-data/train_set.csv')
+init_process('MachineLearning/ml51-data/testdata.manual.2009.06.14.csv', 'MachineLearning/ml51-data/test_set.csv')
 
 
 def create_lexicon(fin):
@@ -47,9 +48,9 @@ def create_lexicon(fin):
 		for line in f:
 			try:
 				counter += 1
-				if (counter/2500.0).is_integer():
+				if (counter / 2500.0).is_integer():
 					tweet = line.split(':::')[1]
-					content += ' '+tweet
+					content += ' ' + tweet
 					words = word_tokenize(content)
 					words = [lemmatizer.lemmatize(i) for i in words]
 					lexicon = list(set(lexicon + words))
@@ -59,20 +60,23 @@ def create_lexicon(fin):
 				print(str(e))
 		print('lex', len(lexicon))
 
-	with open('MachineLearning/ml51-data/lexicon-2500-2544.pickle','wb') as f:
-		pickle.dump(lexicon,f)
+	with open('MachineLearning/ml51-data/lexicon-2500-2610.pickle','wb') as f:
+		pickle.dump(lexicon, f)
 
 create_lexicon('MachineLearning/ml51-data/train_set.csv')
 
 
-def convert_to_vec(fin,fout,lexicon_pickle):
-	with open(lexicon_pickle,'rb') as f:
+def convert_to_vec(fin, fout, lexicon_pickle):
+	with open(lexicon_pickle, 'rb') as f:
 		lexicon = pickle.load(f)
-	outfile = open(fout,'a')
+	
+	outfile = open(fout, 'a')
+	
 	with open(fin, buffering=20000, encoding='latin-1') as f:
 		counter = 0
+		
 		for line in f:
-			counter +=1
+			counter += 1
 			label = line.split(':::')[0]
 			tweet = line.split(':::')[1]
 			current_words = word_tokenize(tweet.lower())
@@ -87,17 +91,18 @@ def convert_to_vec(fin,fout,lexicon_pickle):
 					features[index_value] += 1
 
 			features = list(features)
-			outline = str(features)+'::'+str(label)+'\n'
+			outline = str(features)+ '::' + str(label) + '\n'
 			outfile.write(outline)
 
 		print(counter)
 
-convert_to_vec('MachineLearning/ml51-data/test_set.csv','MachineLearning/ml51-data/processed-test-set.csv','MachineLearning/ml51-data/lexicon-2500-2544.pickle')
+convert_to_vec('MachineLearning/ml51-data/test_set.csv', 'MachineLearning/ml51-data/processed-test-set.csv', 'MachineLearning/ml51-data/lexicon-2500-2610.pickle')
 
 
 def shuffle_data(fin):
 	df = pd.read_csv(fin, error_bad_lines=False, encoding='latin-1')
 	df = df.iloc[np.random.permutation(len(df))]
+	
 	print(df.head())
 	df.to_csv('MachineLearning/ml51-data/train_set_shuffled.csv', index=False)
 	
@@ -105,10 +110,10 @@ shuffle_data('MachineLearning/ml51-data/train_set.csv')
 
 
 def create_test_data_pickle(fin):
-
 	feature_sets = []
 	labels = []
 	counter = 0
+	
 	with open(fin, buffering=20000) as f:
 		for line in f:
 			try:
@@ -120,6 +125,7 @@ def create_test_data_pickle(fin):
 				counter += 1
 			except:
 				pass
+	
 	print(counter)
 	feature_sets = np.array(feature_sets)
 	labels = np.array(labels)

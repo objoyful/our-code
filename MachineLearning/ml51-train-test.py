@@ -4,6 +4,7 @@ import numpy as np
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+tf.disable_eager_execution()
 
 lemmatizer = WordNetLemmatizer()
 
@@ -12,10 +13,9 @@ n_nodes_hl2 = 500
 
 n_classes = 2
 batch_size = 32
-total_batches = int(160000 / batch_size)
+total_batches = int(1000 / batch_size)
 hm_epochs = 10
 
-tf.disable_eager_execution()
 x = tf.placeholder('float')
 y = tf.placeholder('float')
 
@@ -47,11 +47,11 @@ tf_log = 'MachineLearning/ml51-data/tf.log'
 
 def train_neural_network(x):
     prediction = neural_network_model(x)
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = prediction, labels = y))
-    optimizer = tf.train.AdamOptimizer(learning_rate = 0.001).minimize(cost)
+    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
+    optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
     
     with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
+        sess.run(tf.global_variables_initializer())
         
         try:
             epoch = int(open(tf_log, 'r').read().split('\n')[-2]) + 1
@@ -63,12 +63,12 @@ def train_neural_network(x):
             if epoch != 1:
                 saver.restore(sess, "MachineLearning/ml51-data/model.ckpt")
             
-            epoch_loss = 1
+            epoch_loss = 0
             
-            with open('MachineLearning/ml51-data/lexicon-2500-2544.pickle', 'rb') as f:
+            with open('MachineLearning/ml51-data/lexicon-2500-2610.pickle', 'rb') as f:
                 lexicon = pickle.load(f)
             
-            with open('MachineLearning/ml51-data/train_set_shuffled.csv', buffering = 20000, encoding = 'latin-1') as f:
+            with open('MachineLearning/ml51-data/train_set_shuffled.csv', buffering=20000, encoding='latin-1') as f:
                 batch_x = []
                 batch_y = []
                 batches_run = 0
@@ -76,6 +76,7 @@ def train_neural_network(x):
                 for line in f:
                     if batches_run == total_batches:
                         break
+
                     label = line.split(':::')[0]
                     tweet = line.split(':::')[1]
                     
@@ -106,8 +107,8 @@ def train_neural_network(x):
                         batch_x = []
                         batch_y = []
                         
-                        batches_run +=1
-                        print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c, )
+                        batches_run += 1
+                        # print('Batch run:', batches_run, '/', total_batches, '| Epoch:', epoch, '| Batch Loss:', c)
 
             saver.save(sess, "MachineLearning/ml51-data/model.ckpt")
             print('Epoch', epoch, 'completed out of', hm_epochs, 'loss:', epoch_loss)
@@ -123,7 +124,7 @@ def test_neural_network():
     prediction = neural_network_model(x)
     
     with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
+        sess.run(tf.global_variables_initializer())
         
         for epoch in range(hm_epochs):
             try:
@@ -141,7 +142,7 @@ def test_neural_network():
         
         counter = 0
         
-        with open('MachineLearning/ml51-data/processed-test-set.csv', buffering = 20000) as f:
+        with open('MachineLearning/ml51-data/processed-test-set.csv', buffering=20000) as f:
             for line in f:
                 try:
                     features = list(eval(line.split('::')[0]))
