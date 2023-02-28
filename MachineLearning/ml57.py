@@ -15,16 +15,20 @@ y_test = pd.get_dummies(y_test).to_numpy()
 
 n_classes = 10
 batch_size = 128
+hm_epochs = 20
 
 # height x width
 x = tf.placeholder('float', [None, 784])
 y = tf.placeholder('float')
 
+keep_rate = 0.8
+keep_prob = tf.placeholder(tf.float32)
+
 def conv2d(x, W):
     return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
 def maxpool2d(x):
-    #                               size of window        movement of window
+    #                        size of window      movement of window
     return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding = 'SAME')
 
 def convolutional_neural_network(x):
@@ -38,7 +42,7 @@ def convolutional_neural_network(x):
               'b_fc':tf.Variable(tf.random_normal([1024])),
               'out':tf.Variable(tf.random_normal([n_classes]))}
     
-    x = tf.reshape(x, shape = [-1, 28, 28, 1])
+    x = tf.reshape(x, shape=[-1, 28, 28, 1])
     
     conv1 = conv2d(x, weights['W_conv1'])
     conv1 = maxpool2d(conv1)
@@ -49,6 +53,8 @@ def convolutional_neural_network(x):
     fc = tf.reshape(conv2, [-1, 7 * 7 * 64])
     fc = tf.nn.relu(tf.matmul(fc, weights['W_fc']) + biases['b_fc'])
 
+    fc = tf.nn.dropout(fc, keep_prob=keep_rate)
+
     output = tf.matmul(fc, weights['out']) + biases['out']
 
     return output
@@ -57,8 +63,6 @@ def train_neural_network(x):
     prediction = convolutional_neural_network(x)
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
-    
-    hm_epochs = 10
     
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
