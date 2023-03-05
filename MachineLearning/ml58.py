@@ -29,18 +29,18 @@ def conv2d(x, W):
 
 def maxpool2d(x):
     #                        size of window      movement of window
-    return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding = 'SAME')
+    return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
 def convolutional_neural_network(x):
-    weights = {'W_conv1':tf.Variable(tf.random_normal([5, 5, 1, 32])),
-               'W_conv2':tf.Variable(tf.random_normal([5, 5, 32, 64])),
-               'W_fc':tf.Variable(tf.random_normal([7 * 7 * 64, 1024])),
-               'out':tf.Variable(tf.random_normal([1024, n_classes]))}
+    weights = {'W_conv1': tf.Variable(tf.random_normal([5, 5, 1, 32])),
+               'W_conv2': tf.Variable(tf.random_normal([5, 5, 32, 64])),
+               'W_fc': tf.Variable(tf.random_normal([7 * 7 * 64, 1024])),
+               'out': tf.Variable(tf.random_normal([1024, n_classes]))}
 
-    biases = {'b_conv1':tf.Variable(tf.random_normal([32])),
-              'b_conv2':tf.Variable(tf.random_normal([64])),
-              'b_fc':tf.Variable(tf.random_normal([1024])),
-              'out':tf.Variable(tf.random_normal([n_classes]))}
+    biases = {'b_conv1': tf.Variable(tf.random_normal([32])),
+              'b_conv2': tf.Variable(tf.random_normal([64])),
+              'b_fc': tf.Variable(tf.random_normal([1024])),
+              'out': tf.Variable(tf.random_normal([n_classes]))}
     
     x = tf.reshape(x, shape=[-1, 28, 28, 1])
     
