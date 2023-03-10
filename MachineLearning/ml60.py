@@ -8,7 +8,7 @@ from statistics import mean, median
 from collections import Counter
 
 LR = 1e-3
-env = gym.make('CartPole-v0', render_mode="human")
+env = gym.make('CartPole-v0')
 env.reset()
 goal_steps = 500
 score_requirement = 50
@@ -57,12 +57,12 @@ def initial_population():
                 elif data[1] ==  0:
                     output = [1, 0]
                 
-                training_data.appened([data[0], output])
+                training_data.append([data[0], output])
         
         env.reset()
         scores.append(score)
     
-    training_data_save = np.array(training_data)
+    training_data_save = np.array(training_data, dtype=object)
     np.save('MachineLearning/ml60-data/saved.npy', training_data_save)
 
     print('Average accepted score:', mean(accept_scores))
