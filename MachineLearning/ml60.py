@@ -12,7 +12,7 @@ env = gym.make('CartPole-v0')
 env.reset()
 goal_steps = 500
 score_requirement = 50
-inital_games = 10000
+inital_games = 50000
 
 def some_random_games():
     for episode in range(5):
@@ -26,13 +26,13 @@ def some_random_games():
 
 # some_random_games()
 def initial_population():
-    training_data = []
-    scores = []
-    accept_scores = []
+    training_data = [] # [[prev_observation, [1, 0]], [prev_observation, [0, 1]]]] [[prev_observation, move], [prev_observation, move]]
+    scores = [] # 23....
+    accepted_scores = [] # 51..
 
     for _ in range(inital_games):
         score = 0
-        game_memory = []
+        game_memory = [] # [[prev_observation, 0], [prev_observation, 1]] 
         prev_observation = []
 
         for _ in range(goal_steps):
@@ -50,7 +50,7 @@ def initial_population():
                 break
         
         if score >= score_requirement:
-            accept_scores.append(score)
+            accepted_scores.append(score)
             for data in game_memory:
                 if data[1] ==  1:
                     output = [0, 1]
@@ -65,9 +65,11 @@ def initial_population():
     training_data_save = np.array(training_data, dtype=object)
     np.save('MachineLearning/ml60-data/saved.npy', training_data_save)
 
-    print('Average accepted score:', mean(accept_scores))
-    print('Median accepted score:', median(accept_scores))
-    print(Counter(accept_scores))
+    print('Average accepted score:', mean(accepted_scores))
+    print('Median accepted score:', median(accepted_scores))
+    print('Average score:', mean(scores))
+    print('Median score:', median(scores))
+    print(Counter(accepted_scores))
 
     return training_data
 
