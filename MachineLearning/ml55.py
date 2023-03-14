@@ -53,12 +53,16 @@ def train_neural_network(x):
             epoch_loss = 0
             
             i = 0
+            last = len(x_train)
             while i < len(x_train):
                 start = i
                 end = i + batch_size
+                if end > last:
+                    end = last
+                size = end - start
 
                 batch_x = np.array(x_train[start:end])
-                batch_x = batch_x.reshape((batch_size, n_chunks, chunk_size))
+                batch_x = batch_x.reshape((size, n_chunks, chunk_size))
 
                 batch_y = np.array(y_train[start:end])
 
