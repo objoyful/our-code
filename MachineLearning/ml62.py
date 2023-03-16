@@ -17,6 +17,7 @@ inital_games = 50000
 n_epochs = 10
 
 def some_random_games():
+    env = gym.make('CartPole-v0', render='human')
     for episode in range(5):
         env.reset()
         for t in range(goal_steps):
@@ -121,7 +122,7 @@ model = train_model(training_data)
 env = gym.make('CartPole-v0', render_mode='human')
 
 scores = []
-choices = []
+choices = [] # 0 1 1 0 1 
 
 for each_game in range(10):
     score = 0
@@ -134,7 +135,7 @@ for each_game in range(10):
         if len(prev_obs) == 0:
             action = random.randrange(0, 2)
         else:
-            action = np.argmax(model.predict(prev_obs.reshape(-1, len(prev_obs), 1))[0])
+            action = np.argmax(model.predict(prev_obs.reshape(-1, len(prev_obs), 1))[0]) # [0, 1] = 1 [1, 0] = 0
         choices.append(action)
 
         new_observation, reward, terminated, truncated, info = env.step(action)
@@ -145,7 +146,8 @@ for each_game in range(10):
         if done:
             break
     scores.append(score)
+
 print("Average Score", sum(scores) / len(scores))
 print("Best Score:", max(scores))
-print("Choice 1: {}, Choice 2: {}".format(choices.count(1) / len(choices),
+print("Choice 1: {}, Choice 0: {}".format(choices.count(1) / len(choices),
                                           choices.count(0) / len(choices)))
