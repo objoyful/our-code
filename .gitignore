@@ -32,3 +32,4 @@ HangMan/
 /MachineLearning/DogsNCatsData/
 /Kaggle/Predict-Sales/data/
 /mnist/
+*.DS_STORE
