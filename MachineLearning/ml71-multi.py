@@ -1,3 +1,4 @@
+import time; start = time.perf_counter()
 import pydicom as dicom # Read the dicom files
 import os
 import pandas as pd
@@ -10,6 +11,7 @@ from multiprocessing import Pool
 
 IMG_PX_SIZE = 50
 HM_SLICES = 20
+CORES = 8
 
 dir = 'DSB3/'
 data_dir = os.path.join(dir, 'stage1')
@@ -72,13 +74,16 @@ def get_patient_data(patient):
     return img_data, label
 
 if __name__ == '__main__':
-    with Pool() as p:
+    with Pool(CORES) as p:
         much_data.append(p.map(get_patient_data, patients))
+    
+    much_data = much_data[0]
 
+    try:
+        os.makedirs('MachineLearning/ml71-data')
+    except:
+        pass
 
-try:
-    os.makedirs('MachineLearning/ml71-data')
-except:
-    pass
+    np.save(os.path.join('MachineLearning', 'ml71-data', 'muchdata-{}-{}-{}.npy'.format(IMG_PX_SIZE, IMG_PX_SIZE, HM_SLICES)), np.array(much_data, dtype=object))
 
-np.save(os.path.join('MachineLearning', 'ml71-data', 'muchdata-{}-{}-{}.npy'.format(IMG_PX_SIZE, IMG_PX_SIZE, HM_SLICES)), np.array(much_data, dtype=object))
+    print(time.perf_counter() - start)
