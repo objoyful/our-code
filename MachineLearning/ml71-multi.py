@@ -11,7 +11,7 @@ from multiprocessing import Pool
 
 IMG_PX_SIZE = 50
 HM_SLICES = 20
-CORES = 8
+CORES = None
 
 dir = 'DSB3/'
 data_dir = os.path.join(dir, 'stage1')
