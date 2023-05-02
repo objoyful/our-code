@@ -18,6 +18,7 @@ HangMan/
 *.avi
 *.mp3
 /MachineLearning/*-data/
+/Keras/*-data/
 /MachineLearning/DogsNCatsData/
 /Kaggle/Predict-Sales/data/
 /mnist/
