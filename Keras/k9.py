@@ -7,7 +7,7 @@ import random
 
 SEQ_LEN = 60
 FUTURE_PERIOD_PREDICT = 3
-RAIOT_TO_PREDICT = "LTC-USD"
+RATIO_TO_PREDICT = "LTC-USD"
 
 def classify(current, future):
     if float(future) > float(current):
@@ -55,8 +55,8 @@ for ratio in ratios:
     else:
         main_df = main_df.join(df)
 
-main_df["future"] = main_df[f"{RAIOT_TO_PREDICT}_close"].shift(-FUTURE_PERIOD_PREDICT)
-main_df["target"] = list(map(classify, main_df[f"{RAIOT_TO_PREDICT}_close"], main_df["future"]))
+main_df["future"] = main_df[f"{RATIO_TO_PREDICT}_close"].shift(-FUTURE_PERIOD_PREDICT)
+main_df["target"] = list(map(classify, main_df[f"{RATIO_TO_PREDICT}_close"], main_df["future"]))
 # print(main_df[["future", f"{RAIOT_TO_PREDICT}_close", "target"]])
 
 times = sorted(main_df.index.values)
