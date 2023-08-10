@@ -7,7 +7,7 @@ import random
 import time
 import tensorflow as tf
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM, BatchNormalization, CuDNNLSTM
+from keras.layers import Dense, Dropout, LSTM, BatchNormalization
 from keras.callbacks import TensorBoard, ModelCheckpoint
 
 SEQ_LEN = 60
@@ -24,7 +24,7 @@ def classify(current, future):
         return 0
     
 def preprocess_df(df):
-    df = df.drop('future', 1)
+    df = df.drop('future', axis=1)
 
     for col in df.columns:
         if col != "target":
@@ -111,15 +111,15 @@ print(f"Don't buys: {train_y.count(0)}, buys: {train_y.count(1)}")
 print(f"VALIDATION Don't buys: {validation_y.count(0)}, buys: {validation_y.count(1)}")
 
 model = Sequential()
-model.add(CuDNNLSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
 model.add(Dropout(0.2))
 model.add(BatchNormalization())
 
-model.add(CuDNNLSTM(128, return_sequences=True))
+model.add(LSTM(128, return_sequences=True))
 model.add(Dropout(0.1))
 model.add(BatchNormalization())
 
-model.add(CuDNNLSTM(128))
+model.add(LSTM(128))
 model.add(Dropout(0.2))
 model.add(BatchNormalization())
 
@@ -128,7 +128,7 @@ model.add(Dropout(0.2))
 
 model.add(Dense(2, activation="softmax"))
 
-opt = tf.keras.optimizers.Adam(learning_rate=0.001, decay=1e-6)
+opt = tf.keras.optimizers.legacy.Adam(learning_rate=0.001, decay=1e-6)
 model.compile(loss='sparse_categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
