@@ -28,4 +28,6 @@ HangMan/
 *.DS_STORE
 /GPyT/repos/
 /GPyT/token.txt
+/GPyT/bob-token.txt
+/GPyT/dad-token.txt
 /GPyT/repos_test/
