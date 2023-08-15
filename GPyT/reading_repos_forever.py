@@ -28,7 +28,8 @@ while True:
                 result = g.search_repositories(query)
 
                 for repository in result:
-                    path = os.path.join('GPyT', 'repos', start_time_string, repository.owner.login, repository.name)
+                    root = os.path.abspath(os.sep)
+                    path = os.path.join(root, 'mnt', 'e', 'repos', start_time_string, repository.owner.login, repository.name)
                     os.system(f"git clone {repository.clone_url} {path}")
 
                     print(cyan(bold(f"{people[num]}: current system time {start_time} - {end_time}")))
