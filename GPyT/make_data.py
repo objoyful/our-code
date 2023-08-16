@@ -16,6 +16,7 @@ for dirpath, dirnames, filenames in os.walk(d):
 
 with open(os.path.join("GPyT", "python_code.txt"), 'a') as f:
     for fpath in full_paths:
+        print('=' * 50)
         d = open(fpath, 'r').read()
         fd = d.replace('\n', NEWLINECHAR)
 
@@ -24,11 +25,40 @@ with open(os.path.join("GPyT", "python_code.txt"), 'a') as f:
 
         else:
             sd = fd.split(NEWLINECHAR * 2)
+            
             substring = ''
 
             for split in sd:
-                substring += split + (NEWLINECHAR * 2)
+                new_string = substring + split + NEWLINECHAR * 2
+                print(len(new_string))
 
-                if MIN_CHAR_LENGTH <= len(substring) <= MAX_CHAR_LENGTH:
-                    f.write(substring + '\n')
+                if len(new_string) > MAX_CHAR_LENGTH:
+                    print("Entered subsplit")
+                    for subsplit in split.split(NEWLINECHAR):
+                        new_string = substring + subsplit + NEWLINECHAR
+                        print(len(new_string))
+                        
+                        if len(new_string) > MAX_CHAR_LENGTH:
+                            print(on_blue("Too much!"))
+                            break
+                        elif len(new_string) < MIN_CHAR_LENGTH:
+                            substring = new_string
+                        else:
+                            print("Writting!")
+                            f.write(new_string + '\n')
+                            substring = ''
+                    print("Leaving subsplit")
+                elif len(new_string) < MIN_CHAR_LENGTH:
+                    substring = new_string
+                else:
+                    print("Writting!")
+                    f.write(new_string + '\n')
                     substring = ''
+
+                # substring += split + (NEWLINECHAR * 2)
+                # print(len(substring))
+
+                # if MIN_CHAR_LENGTH <= len(substring) <= MAX_CHAR_LENGTH:
+                #     print("writting!")
+                #     f.write(substring + '\n')
+                #     substring = ''
