@@ -2,8 +2,8 @@ import os
 from curtsies.fmtfuncs import red, bold, green, on_blue, yellow, blue, cyan
 import time
 
-
-d = os.path.join("GPyT", "repos_test")
+root_dir = os.path.abspath(os.sep)
+d = os.path.join(root_dir, "mnt", "e", "repos")
 
 for dirpath, dirnames, filenames in os.walk(d):
     for f in filenames:
