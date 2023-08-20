@@ -10,7 +10,8 @@ for dirpath, dirnames, filenames in os.walk(d):
         full_path = os.path.join(dirpath, f)
 
         if full_path.endswith('.py'):
-            print(green(f"Keeping {full_path}"))
+            # print(green(f"Keeping {full_path}"))
+            pass
         else:
             print(red(f"Deleting {full_path}"))
             
