@@ -1,5 +1,5 @@
 from curtsies.fmtfuncs import red, bold, green, on_blue, yellow, blue, cyan
-from tokenizers import ByteLevelBPETokenizer
+from tokenizers import ByteLevelBPETokenizer # type: ignore
 from transformers import GPT2Config, GPT2LMHeadModel, GPT2Tokenizer, DataCollatorForLanguageModeling, Trainer, TrainingArguments
 from datasets import load_dataset
 import os
@@ -37,8 +37,8 @@ tokenizer.add_special_tokens({
 
 config = GPT2Config(
     vocab_size=tokenizer.vocab_size,
-    bos_token = tokenizer.bos_token_id,
-    eos_token = tokenizer.eos_token_id
+    bos_token=tokenizer.bos_token_id,
+    eos_token=tokenizer.eos_token_id
     )
 
 model = GPT2LMHeadModel(config)
@@ -48,7 +48,7 @@ def encode(lines):
     return tokenizer(lines['text'], add_special_tokens=True, truncation=True, max_length=512)
 
 data.set_transform(encode) #type: ignore
-data = data['train']
+data = data['train'] # type: ignore
 
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=True, mlm_probability=0.15)
 
@@ -67,7 +67,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     data_collator=data_collator,
-    train_dataset=data
+    train_dataset=data # type: ignore
 )
 
 trainer.train()
