@@ -47,11 +47,7 @@ data = load_dataset("text", data_files=paths)
 def encode(lines):
     return tokenizer(lines['text'], add_special_tokens=True, truncation=True, max_length=512)
 
-<<<<<<< HEAD
-data.set_transform(encode) # type: ignore
-=======
 data.set_transform(encode) #type: ignore
->>>>>>> 6e0e14d8ebe7f48076861a2be3432d903b4a7176
 data = data['train'] # type: ignore
 
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=True, mlm_probability=0.15)
