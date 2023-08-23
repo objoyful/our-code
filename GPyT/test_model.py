@@ -39,9 +39,9 @@ for k in model_out:
 for out in model_out['sequences']: # type: ignore
     print(out)
 
-print(len(model_out['scores']))
+print(len(model_out['scores'])) # type: ignore
 
-for mask_token in model_out['scores']:
+for mask_token in model_out['scores']: # type: ignore
     print(len(mask_token))
     for beam in mask_token:
         print(len(beam))
