@@ -41,7 +41,7 @@ config = GPT2Config(
     eos_token = tokenizer.eos_token_id
     )
 
-model = GPT2LMHeadModel.from_pretrained(os.path.join("GPyT", "model")).to('cuda')
+model = GPT2LMHeadModel.from_pretrained(os.path.join("GPyT", "model")).to('cuda') # type: ignore
 while True:
     inp = input(">>> ")
     input_ids = tokenizer.encode(inp, return_tensors='pt').to('cuda')
@@ -51,7 +51,7 @@ while True:
         num_beams = 10,
         temperature = 0.7,
         no_repeat_ngram_size = 5,
-        num_return_sequences = 1
+        num_return_sequences = 3
         )
     for beam in beam_output:
         out = tokenizer.decode(beam)
