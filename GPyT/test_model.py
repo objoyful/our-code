@@ -37,8 +37,8 @@ model_out = model.generate(
 
 for k in model_out:
     print(k)
-# for out in model_out['sequences']: # type: ignore
-#     print(out)
+for out in model_out['sequences']: # type: ignore
+    print(out)
 
 print(len(model_out['scores'])) # type: ignore
 
