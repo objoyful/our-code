@@ -20,6 +20,8 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 cap = cv2.VideoCapture(0)
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 # patch tf1 into `utils.ops`
 utils_ops.tf = tf.compat.v1
@@ -122,7 +124,7 @@ def show_inference(model):
         use_normalized_coordinates=True,
         line_thickness=8)
 
-    cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
+    cv2.imshow('object detection',image_np)
 
 while True:
   show_inference(detection_model)
