@@ -8,6 +8,7 @@ import tarfile
 import tensorflow as tf
 import zipfile
 import cv2
+import time
 
 from collections import defaultdict
 from io import StringIO
@@ -20,8 +21,8 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 cap = cv2.VideoCapture(0)
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 # patch tf1 into `utils.ops`
 utils_ops.tf = tf.compat.v1
@@ -51,24 +52,21 @@ def load_model(model_name):
 PATH_TO_LABELS = 'object-detection/models/research/object_detection/data/mscoco_label_map.pbtxt'
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
-# For the sake of simplicity we will test on 2 images:
-
-# If you want to test the code with your images, just add path to the images to the TEST_IMAGE_PATHS.
-PATH_TO_TEST_IMAGES_DIR = pathlib.Path('object-detection/models/research/object_detection/test_images')
-TEST_IMAGE_PATHS = sorted(list(PATH_TO_TEST_IMAGES_DIR.glob("*.jpg")))
-
 # # Detection
 
 # Load an object detection model:
 model_name = 'ssd_mobilenet_v1_coco_2017_11_17'
 detection_model = load_model(model_name)
 
+model_name = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
+masking_model = load_model(model_name)
+
 # Check the model's input signature, it expects a batch of 3-color images of type uint8:
 print(detection_model.signatures['serving_default'].inputs) # type: ignore
 
 # And returns several outputs:
-detection_model.signatures['serving_default'].output_dtypes # type: ignore
-detection_model.signatures['serving_default'].output_shapes # type: ignore
+print(detection_model.signatures['serving_default'].output_dtypes) # type: ignore
+print(detection_model.signatures['serving_default'].output_shapes) # type: ignore
 
 # Add a wrapper function to call the model, and cleanup the outputs:
 def run_inference_for_single_image(model, image):
@@ -76,7 +74,7 @@ def run_inference_for_single_image(model, image):
   # The input needs to be a tensor, convert it using `tf.convert_to_tensor`.
   input_tensor = tf.convert_to_tensor(image)
   # The model expects a batch of images, so add an axis with `tf.newaxis`.
-  input_tensor = input_tensor[tf.newaxis,...]
+  input_tensor = input_tensor[tf.newaxis,...] # type: ignore
 
   # Run inference
   model_fn = model.signatures['serving_default']
@@ -107,6 +105,7 @@ def run_inference_for_single_image(model, image):
 
 # Run it on each test image and show the results:
 def show_inference(model):
+  start_time = time.time()
   # the array based representation of the image will be used later in order to prepare the
   # result image with boxes and labels on it.
   ret, image_np = cap.read()
@@ -123,11 +122,12 @@ def show_inference(model):
         instance_masks=output_dict.get('detection_masks_reframed', None),
         use_normalized_coordinates=True,
         line_thickness=8)
-
+    fps = 1 / (time.time() - start_time)
+    cv2.putText(image_np, str(round(fps, 2)), (0, 100), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255))
     cv2.imshow('object detection',image_np)
 
 while True:
-  show_inference(detection_model)
-  if cv2.waitKey(25) & 0xFF == ord('q'):
+  show_inference(masking_model)
+  if cv2.waitKey(1) & 0xFF == ord('q'):
     cv2.destroyAllWindows()
     break
