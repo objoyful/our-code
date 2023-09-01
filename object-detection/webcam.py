@@ -21,8 +21,8 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 cap = cv2.VideoCapture(0)
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 # patch tf1 into `utils.ops`
 utils_ops.tf = tf.compat.v1
@@ -127,7 +127,7 @@ def show_inference(model):
     cv2.imshow('object detection',image_np)
 
 while True:
-  show_inference(masking_model)
+  show_inference(detection_model)
   if cv2.waitKey(1) & 0xFF == ord('q'):
     cv2.destroyAllWindows()
     break
