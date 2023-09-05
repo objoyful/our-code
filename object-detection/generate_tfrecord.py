@@ -42,7 +42,6 @@ def split(df, group):
 
 
 def create_tf_example(group, path):
-    print(path)
     with tf.gfile.GFile(os.path.join(path, '{}'.format(group.filename)), 'rb') as fid: # type: ignore
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg) # type: ignore
