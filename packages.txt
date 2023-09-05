@@ -80,7 +80,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal
 
 pip install pip pipwin attrdict3 wheel Fiona pyproject.toml swig dnn "opencv-contrib-python<4"
 
-PIP: pip numpy scipy matplotlib ipython scikit-learn pandas "pillow<10" jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock keras_preprocessing keras_applications gast "futures<3" "protobuf<3.21" pybind11 qtpy pyopengl "pyyaml<5.4" cmake pyttsx3 gTTS quandl kaggle pydicom tqdm "cython<3" xgboost google-cloud-bigquery geopandas eli5 pipwin libsvm xlrd lxml tcx2gpx gmplot wxPython opencv-contrib-python nltk pygame scikit-image h5py cvxopt pygithub curtsies transformers[torch] datasets gymnasium[all] tf_slim pycocotools
+PIP: pip numpy scipy matplotlib ipython scikit-learn pandas "pillow<10" jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock keras_preprocessing keras_applications gast "futures<3" "protobuf<3.21" pybind11 qtpy pyopengl "pyyaml<5.4" cmake pyttsx3 gTTS quandl kaggle pydicom tqdm "cython<3" xgboost google-cloud-bigquery geopandas eli5 pipwin libsvm xlrd lxml tcx2gpx gmplot wxPython opencv-contrib-python nltk pygame scikit-image h5py cvxopt pygithub curtsies transformers[torch] datasets gymnasium[all] tf_slim pycocotools pyqt5
 
 [Tensorflow / CUDA]
 pip install tensorflow_datasets tflearn face_recognition "tensorflow<2.13"
