@@ -23,7 +23,7 @@ from collections import namedtuple, OrderedDict
 flags = tf.app.flags # type: ignore
 flags.DEFINE_string('csv_input', '', 'Path to the CSV input')
 flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
-flags.DEFINE_string('image_dir', '', 'Path to images')
+flags.DEFINE_string('image_dir', 'object-detection/downloads/', 'Path to images')
 FLAGS = flags.FLAGS
 
 

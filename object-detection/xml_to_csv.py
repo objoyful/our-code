@@ -11,7 +11,7 @@ def xml_to_csv(path):
         root = tree.getroot()
         for member in root.findall('object'):
             full_path = os.path.join("object-detection", "downloads", root.find('filename').text) # type: ignore
-            value = (full_path,
+            value = (root.find('filename').text, # type: ignore
                      int(root.find('size')[0].text), # type: ignore
                      int(root.find('size')[1].text), # type: ignore
                      member[0].text,
