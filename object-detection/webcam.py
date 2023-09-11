@@ -21,8 +21,8 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
 cap = cv2.VideoCapture(0)
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 # patch tf1 into `utils.ops`
 utils_ops.tf = tf.compat.v1
@@ -31,7 +31,13 @@ utils_ops.tf = tf.compat.v1
 tf.gfile = tf.io.gfile # type: ignore
 
 def load_model(model_name):
-  model_dir = model_name
+  base_url = 'http://download.tensorflow.org/models/object_detection/'
+  model_file = model_name + '.tar.gz'
+  model_dir = tf.keras.utils.get_file(
+    fname=model_name, 
+    origin=base_url + model_file,
+    untar=True)
+
   model_dir = pathlib.Path(model_dir)/"saved_model"
 
   model = tf.saved_model.load(str(model_dir))
@@ -43,14 +49,17 @@ def load_model(model_name):
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = 'object-detection/data/label_map.txt'
+PATH_TO_LABELS = 'object-detection/models/research/object_detection/data/mscoco_label_map.pbtxt'
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
 # # Detection
 
 # Load an object detection model:
-model_name = 'object-detection/prebuilt'
+model_name = 'ssd_mobilenet_v1_coco_2017_11_17'
 detection_model = load_model(model_name)
+
+model_name = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
+masking_model = load_model(model_name)
 
 # Check the model's input signature, it expects a batch of 3-color images of type uint8:
 print(detection_model.signatures['serving_default'].inputs) # type: ignore
