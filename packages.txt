@@ -76,17 +76,21 @@ pip install gdal
 [LINUX]
 pip install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}')
 [Windows]
-https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal
+https://github.com/cgohlke/geospatial-wheels/releases
 
-pip install pip pipwin attrdict3 wheel Fiona pyproject.toml swig dnn "opencv-contrib-python<4"
+pip install pip pipwin attrdict3 wheel Fiona pyproject.toml swig dnn
 
-PIP: pip numpy scipy matplotlib ipython scikit-learn pandas "pillow<10" jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock keras_preprocessing keras_applications gast "futures<3" "protobuf<3.21" pybind11 qtpy pyopengl "pyyaml<5.4" cmake pyttsx3 gTTS quandl kaggle pydicom tqdm "cython<3" xgboost google-cloud-bigquery geopandas eli5 pipwin libsvm xlrd lxml tcx2gpx gmplot wxPython opencv-contrib-python nltk pygame scikit-image h5py cvxopt pygithub curtsies "transformers[torch]" datasets "gymnasium[all]" tf_slim pycocotools pyqt5
+PIP: pip numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter mglearn statsmodels keras graphviz Django dronekit dronekit-sitl MAVProxy monotonic adafruit-circuitpython-servokit testresources setuptools future mock keras_preprocessing keras_applications gast futures protobuf pybind11 qtpy pyopengl pyyaml cmake pyttsx3 gTTS quandl kaggle pydicom tqdm cython xgboost google-cloud-bigquery geopandas eli5 pipwin libsvm xlrd lxml tcx2gpx gmplot wxPython opencv-contrib-python nltk pygame scikit-image h5py cvxopt pygithub curtsies datasets tf_slim pycocotools pyqt5
+
+Python 3.12:
+"transformers[torch]" "gymnasium[all]"
 
 [Tensorflow / CUDA]
-pip install tensorflow_datasets tflearn face_recognition "tensorflow<2.13"
+pip install tensorflow_datasets tflearn face_recognition 
 
-[Windows <3.11]
-"tensorflow<2.11"
+Python 3.12:
+tensorflow
+
 
 [WSL]
 cuda
