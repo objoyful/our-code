@@ -17,4 +17,3 @@ int Square(int n) {
 int Cube(int n) {
     return n * n * n;
 }
-
