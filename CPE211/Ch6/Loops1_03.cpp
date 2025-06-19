@@ -1,5 +1,5 @@
 // Chapter 6  - program 3
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 // Event controlled loops
