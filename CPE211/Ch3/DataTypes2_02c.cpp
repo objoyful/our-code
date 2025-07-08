@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cmath>
 #include <climits>
+#include <string>
 
 using namespace std;
 
