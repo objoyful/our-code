@@ -1,0 +1,66 @@
+//******************************************************************
+// Lecture Example Chapter 12 #1
+// Ron Bowman
+// 
+//
+// Sample of Chapter  12 material 
+// Using one-dimensional arrays to hold characters entered on one line
+// Maximum number of characters is 256.
+// Characters entered are to be output in reverse order.  Use functions
+// to read and output the characters. 
+
+//******************************************************************
+#include <iostream>  // for standard input and output
+
+using namespace std; //include all basic C++ declarations
+
+const int MAX = 16;
+
+void ReadData(char[], int &);  // function to obtain characters entered
+void PrintData(const char[], int); // output the characters in reverse order
+
+int main() {
+    char characters[MAX];    // holds the characters read in from the input
+    int numValues;           // Hold the number of chars read from input
+    
+    // Read in the characters from the input
+    ReadData(characters, numValues);
+    
+    // Print the characters in reverse order
+    PrintData(characters, numValues);
+    
+    return 0;
+}
+
+void ReadData(char characters[], int & numChars) {
+    // this function reads in the chars on a single line until the new line
+    // character is encountered.  The chars are stored in a one-dimensional
+    // array.  Assume that less than 256 characters are provided
+
+    char ch;               // character read from the input stream
+    numChars = 0;              // number of characters read
+    
+    cout << "Enter in up to " << MAX << " characters: ";
+    cin.get(ch);         // use the get function to obtain first character
+    
+    while(ch != '\n' && numChars < MAX) {   // if character read is the newline character, end loop
+        characters[numChars] = ch;  // assign character read tot he array
+        numChars++;            // increment the array index counter
+        cin.get(ch);        // try to read another character from the input stream
+    }
+    
+    if (ch != '\n') {
+        cout << "Error!!! More than " << MAX << " characters were entered on the line\n";
+        cout << "Program is designed for " << MAX << " characters only!!\n";
+    }
+}
+
+void PrintData(const char ch[], int numChars) {
+     int index;      // loop control variable
+     
+     for (index = numChars - 1; index >= 0; index--) {
+         cout << ch[index];   // output characters entered in reverse order
+     }
+
+     cout << endl;
+}
