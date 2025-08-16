@@ -45,3 +45,4 @@ HangMan/
 /nvvm/
 /nnfs/fashion_mnist_images/
 handson-ml-master/
+*.pkl
