@@ -97,7 +97,7 @@ PIP: pip numpy scipy matplotlib ipython scikit-learn pandas pillow jupyter mglea
 pygame
 
 [Tensorflow / CUDA]
-pip install tensorflow_datasets tflearn face_recognition tensorflow[and-cuda] nvidia-cuda-runtime-cu13 tensorrt tensorrt_lean tensorrt_dispatch nvidia-cudnn-cu13 nvidia-cudnn-jit-cu13
+pip install tensorflow_datasets tflearn face_recognition tensorflow[and-cuda] nvidia-cuda-runtime tensorrt tensorrt_lean tensorrt_dispatch nvidia-cudnn-cu13 nvidia-cudnn-jit-cu13
 
 [WSL]
 cuda
